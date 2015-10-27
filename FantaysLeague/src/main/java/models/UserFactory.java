@@ -1,12 +1,15 @@
 package models;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 
 
 public class UserFactory {
 	
+	private static final String USERS_FILEPATH = "resources/users/";
+
 	public User newUser(String userName, String password){
 		User user = new User(userName, password);
 		user.save();
@@ -15,12 +18,8 @@ public class UserFactory {
 	
 	public User load(String userName){
 		try{
-			String path = "resources/users/" + userName;
-			BufferedReader userFile = new BufferedReader(new FileReader(path));
-			String line = userFile.readLine();
-			userFile.close();
-			//UserInfo = {NAME, PASSWORD[, TEAM]}
-			String userInfo[] = line.split(",");
+			//UserInfo = {NAME, PASSWORD, TEAM}
+			String[] userInfo = FileUtils.readFileToString(new File(USERS_FILEPATH + userName)).split(",");
 			if(userInfo.length == 2)
 				//No team created
 				return new User(userInfo[0], userInfo[1]);
@@ -32,5 +31,4 @@ public class UserFactory {
 		}
 		return null;
 	}
-
 }

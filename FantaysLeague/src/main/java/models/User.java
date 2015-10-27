@@ -60,10 +60,12 @@ public class User implements IUser {
 		this.password = password;
 	}
 
+	@Override
 	public String getTeamName() {
 		return teamName;
 	}
 
+	@Override
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
