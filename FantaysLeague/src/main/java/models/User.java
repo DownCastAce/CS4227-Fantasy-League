@@ -12,7 +12,7 @@ public class User implements IUser {
 	 */
     private static final String FILEPATH = "resources/users/";
     private String userName, password, teamName;
-
+    
     public User(String userName, String password) {
         this.userName = userName;
     	this.password = password;

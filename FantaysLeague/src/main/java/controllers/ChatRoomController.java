@@ -140,7 +140,7 @@ public class ChatRoomController {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			Logout();
-			GoBackToInitialMenuCommand com = new GoBackToInitialMenuCommand();
+			GoBackToMainMenuCommand com = new GoBackToMainMenuCommand(user);
 			view.dispose();
 			com.execute();
 		}
