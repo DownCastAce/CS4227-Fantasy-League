@@ -10,28 +10,27 @@ public class TeamFactory {
 	
 	private static final String FILEPATH = "resources/teams/";
 	
-    public static Team load(String sport, String name, String rosterName) {
+    public static Team load(String sport, String teamName, String rosterName) {
     	Team team = null;
     	if(sport.equals("soccer")){
-    		ArrayList<SoccerPlayer> players =  new ArrayList<SoccerPlayer>();
+    		ArrayList<SoccerPlayer> teamPlayers =  new ArrayList<SoccerPlayer>();
 	    	Roster roster = new Roster(rosterName);
-	    	List<String> lines;
+	    	List<String> playerIdsList;
 	    	
 	    	//load file into List
 	    	try{
-				lines = FileUtils.readLines(new File(FILEPATH + name));
+				playerIdsList = FileUtils.readLines(new File(FILEPATH + teamName));
 	    	}catch (IOException e) {
 				e.printStackTrace();
 				return null;
 			}
 	    	//Create user based on the first line of the list
-	    	User owner = UserFactory.load(lines.get(0));
-	    	lines.remove(0);
+	    	User teamOwner = UserFactory.load(playerIdsList.remove(0));
 	    	
 	    	//create a list of player by iterating over ids in the list.
-	    	for(String line: lines)
-	    		players.add(roster.getPlayer(line));
-	    	team = new SoccerTeam(name, owner, players);
+	    	for(String playerId: playerIdsList)
+	    		teamPlayers.add(roster.getPlayer(playerId));
+	    	team = new SoccerTeam(teamName, teamOwner, teamPlayers);
     	}
     	return team;
     }

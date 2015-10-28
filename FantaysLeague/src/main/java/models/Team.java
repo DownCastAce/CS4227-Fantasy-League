@@ -1,6 +1,5 @@
 package models;
 
-import java.awt.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,7 +78,7 @@ public class Team {
     
     public boolean save() {
     	ArrayList<String> output = new ArrayList<String>();
-    	File saveFile = new File(this.teamName);
+    	File saveFile = new File(FILEPATH + this.teamName);
     	
     	output.add(teamName);
     	for(Player player: selectPlayers){

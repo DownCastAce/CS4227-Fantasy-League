@@ -1,18 +1,10 @@
 package models;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-
-import org.apache.commons.io.FileUtils;
 
 public class SoccerTeam extends Team {
 	
-	private static final String FILEPATH = "resources/teams/";
-	
-    public SoccerTeam(String teamname, User owner) {
+	public SoccerTeam(String teamname, User owner) {
         // Create empty team.
         super(teamname, owner);
         setAmountOfPlayersAllowed(15);

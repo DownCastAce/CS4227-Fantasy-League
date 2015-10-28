@@ -1,7 +1,5 @@
 package models;
 
-import java.util.HashMap;
-
 /**
  *
  * @author Peter

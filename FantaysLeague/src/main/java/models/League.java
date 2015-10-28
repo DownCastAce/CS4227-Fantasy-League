@@ -15,27 +15,27 @@ public class League {
     protected Map<Team, Integer> leagueTeams;
     protected String leagueName;
     protected String sport;
-    protected int winPoints, lossPoints, drawPoints;
     
     protected File SAVEFILE = new File("resources/leagues/" + leagueName);
     
-    public League(User owner, String name, String roster){
+    public League(User owner, String leagueName, String sport, String roster){
     	//creating empty league
     	this.owner = owner;
     	this.lastUpdate = new Date();
-    	this.leagueName = name;
+    	this.leagueName = leagueName;
     	//Add the owners team.
     	leagueTeams.put(TeamFactory.load(sport, owner.getTeamName(), roster), 0);
     }
-    public League(User owner, String name, String sport, String roster, int win, int loss, int draw){
-    	//creating empty league
+    //
+    public League(User owner, String leagueName, String sport, Date lastUpdate, Map<Team, Integer> leagueTeams){
+    	//Loading league
     	this.sport = sport;
     	this.owner = owner;
-    	this.lastUpdate = new Date();
-    	this.leagueName = name;
-    	setResultPoints(win, loss, draw);
-    	//Add the owners team.
-    	leagueTeams.put(TeamFactory.load(sport, owner.getTeamName(), roster), 0);
+    	this.lastUpdate = lastUpdate;
+    	this.leagueName = leagueName;
+    	this.lastUpdate = lastUpdate;
+    	//Add all the league team.
+    	this.leagueTeams = leagueTeams;
     }
     
     public void addTeam(Team team){
@@ -64,20 +64,13 @@ public class League {
     	for(Map.Entry<Team, Integer> entry: leagueTeams.entrySet()){
     		output.add(entry.getKey() + "," + entry.getValue());
     	}
-    	try{
-		FileUtils.write(SAVEFILE, owner.getUserName());
-		String resultPoints = "" + winPoints + "," + lossPoints + "," + drawPoints;
-		FileUtils.write(SAVEFILE, resultPoints);
-    	FileUtils.writeLines(SAVEFILE, output);
-    	}catch(IOException e){
+    	
+    	try {
+    		FileUtils.write(SAVEFILE, owner.getUserName());
+    		FileUtils.writeLines(SAVEFILE, output);
+    	} catch(IOException e) {
     		return false;
     	}
     	return true;
-    }
-    public void setResultPoints(int win, int loss, int draw){
-    	winPoints = win;
-    	lossPoints = loss;
-    	drawPoints = draw;
-    }
-    
+    }    
 }
