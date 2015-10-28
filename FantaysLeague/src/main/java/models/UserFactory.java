@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class UserFactory {
 	
-	public User newUser(String userName, String password){
+	public static User newUser(String userName, String password){
 		User user = new User(userName, password);
 		user.save();
 		return user;
 	}
 	
-	public User load(String userName){
+	public static User load(String userName){
 		try{
 			String path = "resources/users/" + userName;
 			BufferedReader userFile = new BufferedReader(new FileReader(path));
