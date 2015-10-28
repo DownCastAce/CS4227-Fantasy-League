@@ -27,6 +27,8 @@ public class MainMenuView extends JFrame {
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 659, 406);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.desktop);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,5 +54,25 @@ public class MainMenuView extends JFrame {
 		btnChatRoom.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnChatRoom.setBounds(39, 298, 537, 51);
 		contentPane.add(btnChatRoom);
+	}
+	
+	public void addCreateTeamListener(ActionListener createTeamListener)
+	{
+		btnCreateTeam.addActionListener(createTeamListener);
+	}
+	
+	public void addViewTeamListener(ActionListener viewTeamListener)
+	{
+		btnViewTeam.addActionListener(viewTeamListener);
+	}
+	
+	public void addViewLeagueListener(ActionListener viewLeagueListener)
+	{
+		btnLeague.addActionListener(viewLeagueListener);
+	}
+	
+	public void addChatRoomListener(ActionListener chatRoomListener)
+	{
+		btnChatRoom.addActionListener(chatRoomListener);
 	}
 }

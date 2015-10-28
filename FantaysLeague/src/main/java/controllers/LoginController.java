@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import models.IUser;
 import views.InitialMenuView;
 import views.LoginView;
+import views.MainMenuView;
 
 public class LoginController {
 	
@@ -32,13 +33,10 @@ public class LoginController {
 			c.execute();
 			user = c.getUser();
 			
-			if(user == null){
-				JOptionPane.showMessageDialog(null, "Error", "Invalid Login, Try Again!", 0);
-			}
+			MainMenuView mainview = new MainMenuView();
+			MainMenuController mainmenu = new MainMenuController(user,mainview);
 			
-			else{
-				System.out.println("Logged in as: " + user.getUserName());
-			}
+			view.dispose();
 		}
 		
 	}
@@ -48,7 +46,7 @@ public class LoginController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			CancelCommand c = new CancelCommand();
+			GoBackToInitialMenuCommand c = new GoBackToInitialMenuCommand();
 			c.execute();
 			view.dispose();
 		}

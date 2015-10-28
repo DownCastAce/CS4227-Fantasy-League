@@ -9,12 +9,10 @@ import views.RegisterView;
 public class RegisterController {
 	
 	private RegisterView view;
-	private InitialMenuView im;
 	
-	public RegisterController(RegisterView v, InitialMenuView i)
+	public RegisterController(RegisterView v)
 	{
 		view = v;
-		im = i;
 		view.setVisible(true);
 		
 		view.addConfirmListener(new ListenForConfirm());
@@ -27,8 +25,9 @@ public class RegisterController {
 		{
 			ConfirmRegisterCommand c = new ConfirmRegisterCommand(view.getUsername(),view.getPassword());
 			c.execute();
+			GoBackToInitialMenuCommand confirm = new GoBackToInitialMenuCommand();
+			confirm.execute();
 			view.dispose();
-			im.setVisible(true);
 		}
 	}
 	
@@ -36,9 +35,9 @@ public class RegisterController {
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			CancelCommand c = new CancelCommand();
-			c.execute();
+			GoBackToInitialMenuCommand c = new GoBackToInitialMenuCommand();
 			view.dispose();
+			c.execute();
 		}
 	}
 }
