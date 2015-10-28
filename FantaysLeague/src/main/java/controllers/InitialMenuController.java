@@ -21,7 +21,7 @@ public class InitialMenuController {
 
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			RegisterCommand c = new RegisterCommand(view);
+			RegisterCommand c = new RegisterCommand();
 			c.execute();
 			view.dispose();
 		}

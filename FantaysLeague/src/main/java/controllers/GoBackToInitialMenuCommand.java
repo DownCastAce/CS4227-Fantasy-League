@@ -2,7 +2,7 @@ package controllers;
 
 import views.InitialMenuView;
 
-public class CancelCommand implements Command {
+public class GoBackToInitialMenuCommand implements Command {
 
 	@Override
 	public void execute() {

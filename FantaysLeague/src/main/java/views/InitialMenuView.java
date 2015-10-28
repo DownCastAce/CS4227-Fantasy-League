@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 
 public class InitialMenuView extends JFrame {
@@ -20,11 +21,13 @@ public class InitialMenuView extends JFrame {
 	public InitialMenuView() 
 	{
 		setTitle("Menu");
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 387, 166);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(SystemColor.desktop);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -34,10 +37,12 @@ public class InitialMenuView extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		btnLogin = new JButton("Log In");
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnLogin.setBounds(49, 82, 91, 23);
 		contentPane.add(btnLogin);
 		
 		btnRegister = new JButton("Register");
+		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnRegister.setBounds(256, 82, 91, 23);
 		contentPane.add(btnRegister);
 
