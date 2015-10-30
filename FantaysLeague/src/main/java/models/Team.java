@@ -29,7 +29,7 @@ public class Team {
         this.amountOfPlayersAllowed = amountOfPlayersAllowed;
     }
 
-    public ArrayList<? extends Player> getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
         return selectPlayers;
     }
 

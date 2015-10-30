@@ -27,7 +27,7 @@ public class LoginView extends JFrame {
 		setBounds(100, 100, 402, 182);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(SystemColor.activeCaptionText);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
