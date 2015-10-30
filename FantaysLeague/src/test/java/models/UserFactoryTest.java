@@ -28,8 +28,7 @@ public class UserFactoryTest {
 	public void testLoad() {
 		User expectedUser = new User(TEST_USER, PASSWORD, TEST_TEAM);
 		expectedUser.save();
-		UserFactory uf = new UserFactory();
-		User actualUser = uf.load(TEST_USER);
+		User actualUser = UserFactory.load(TEST_USER);
 		assertTrue("User name doesn't match (Expected : Actual) " + expectedUser.getUserName() + " : " + actualUser.getUserName(), expectedUser.getUserName().equals(actualUser.getUserName()));
 		assertTrue("Password name doesn't match (Expected : Actual) " + expectedUser.getPassword() + " : " + actualUser.getPassword(), expectedUser.getPassword().equals(actualUser.getPassword()));
 		assertTrue("Team name doesn't match (Expected : Actual) " + expectedUser.getTeamName() + " : " + actualUser.getTeamName(), expectedUser.getTeamName().equals(actualUser.getTeamName()));

@@ -80,9 +80,9 @@ public class Team {
     	ArrayList<String> output = new ArrayList<String>();
     	File saveFile = new File(FILEPATH + this.teamName);
     	
-    	output.add(teamName);
+    	output.add(teamName + "\n");
     	for(Player player: selectPlayers){
-    		output.add(player.getID());
+    		output.add(player.getID() + "\n");
     	}
     	
     	try{

@@ -34,7 +34,7 @@ public class UserTest {
 	@Test
 	public void testSave() throws IOException {
 		IUser testUser = new User(TEST_USER, PASSWORD, TEST_TEAM);
-		assertTrue("File saved as expected", testUser.save());
+		assertTrue("File didn't saved as expected", testUser.save() && (new File(FILEPATH + TEST_USER).exists()));
 		String[] actualResult = FileUtils.readFileToString(new File(FILEPATH + TEST_USER)).split(",");
 		assertTrue("Number of strings written wrong", 3 == actualResult.length);
 		assertTrue("User name doesn't match (Expected : Actual) " + TEST_USER + " : " + actualResult[0], TEST_USER.equals(actualResult[0]));

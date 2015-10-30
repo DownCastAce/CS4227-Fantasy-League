@@ -8,7 +8,7 @@ import org.apache.commons.io.FileUtils;
 
 public class TeamFactory {
 	
-	private static final String FILEPATH = "resources/teams/";
+	private static final String FILEPATH = "resources/Teams/";
 	
     public static Team load(String sport, String teamName, String rosterName) {
     	Team team = null;

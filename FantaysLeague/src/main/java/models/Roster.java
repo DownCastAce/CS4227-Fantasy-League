@@ -8,11 +8,12 @@ import org.apache.commons.io.FileUtils;
 
 public class Roster implements IRoster{
 
+	private static final String ROSTER_FILEPATH = "resources/Rosters/";
     private ArrayList<SoccerPlayer> allPlayers = new ArrayList<SoccerPlayer>();
 
     public Roster(String fileName) {
         try {
-            List<String> players = FileUtils.readLines(new File(fileName));
+            List<String> players = FileUtils.readLines(new File(ROSTER_FILEPATH + fileName));
             for (String input : players) {
                 String[] player = input.split(",");
                 allPlayers.add(new SoccerPlayer(player[0], player[1], player[2], Double.parseDouble(player[3])));

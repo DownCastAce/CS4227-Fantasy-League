@@ -8,6 +8,7 @@ public class SoccerTeam extends Team {
         // Create empty team.
         super(teamname, owner);
         setAmountOfPlayersAllowed(15);
+        selectPlayers = new ArrayList<>();
         budget = 100.0;
         positions.put("G", 2);
         positions.put("D", 5);
@@ -20,14 +21,13 @@ public class SoccerTeam extends Team {
         // Load team from file.
         super(teamName, owner);
         setAmountOfPlayersAllowed(15);
+        selectPlayers = new ArrayList<>();
         budget = 100.0;
         positions.put("G", 2);
         positions.put("D", 5);
         positions.put("M", 5);
         positions.put("F", 3);
-        
         selectPlayers.addAll(players);
-
     }
 
     public boolean tryAddPlayer(SoccerPlayer nextPlayer) {
