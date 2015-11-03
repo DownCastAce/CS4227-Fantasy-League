@@ -2,20 +2,26 @@ package models;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
-public class Roster implements IRoster{
+import stats.Observer;
+import stats.Stat;
 
-    private ArrayList<SoccerPlayer> allPlayers = new ArrayList<SoccerPlayer>();
+public class Roster extends Observer implements IRoster{
+
+    private ArrayList<Player> allPlayers = new ArrayList<Player>();
+    private Map<Integer, ArrayList<Stat>> stats = new HashMap<Integer, ArrayList<Stat>>();
 
     public Roster(String fileName) {
         try {
             List<String> players = FileUtils.readLines(new File(fileName));
             for (String input : players) {
                 String[] player = input.split(",");
-                allPlayers.add(new SoccerPlayer(player[0], player[1], player[2], Double.parseDouble(player[3])));
+                allPlayers.add(new Player(player[0], player[1], player[2], Double.parseDouble(player[3])));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,24 +29,30 @@ public class Roster implements IRoster{
         }
     }
 
-    public ArrayList<SoccerPlayer> getAllPlayers() {
+    public ArrayList<Player> getAllPlayers() {
         return allPlayers;
     }
     
-    public ArrayList<SoccerPlayer> getPlayersAtPosition(String position){
-    	ArrayList<SoccerPlayer> result = new ArrayList<SoccerPlayer>();
-    	for(SoccerPlayer player: allPlayers){
+    public ArrayList<Player> getPlayersAtPosition(String position){
+    	ArrayList<Player> result = new ArrayList<Player>();
+    	for(Player player: allPlayers){
     		if(player.getPosition().equals(position))
     			result.add(player);
     	}
     	return result;
     }
     
-    public SoccerPlayer getPlayer(String id){
-    	for(SoccerPlayer p: allPlayers){
+    public Player getPlayer(String id){
+    	for(Player p: allPlayers){
     		if(p.getID().equals(id))
     			return p;
     	}
     	return null;
     }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }
