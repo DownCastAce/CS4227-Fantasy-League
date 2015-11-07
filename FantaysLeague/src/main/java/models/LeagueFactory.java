@@ -13,13 +13,13 @@ public class LeagueFactory {
 
 	private static final String FILEPATH = "resources/leagues/";
 	
-	public static League newLeague(User owner, String leagueName, String sport){
-		League result = new League(owner, leagueName, sport);
+	public static ILeague newLeague(User owner, String leagueName, String sport){
+		ILeague result = new League(owner, leagueName, sport);
 		result.save();
 		return result;
 	}
 	
-	public static League load(String leagueName, String sport){
+	public static ILeague load(String leagueName, String sport){
 		List<String> lines;
 		Date leagueDate;
 		try{

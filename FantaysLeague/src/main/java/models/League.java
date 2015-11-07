@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
-public class League {
+public class League implements ILeague{
 
     protected Date lastUpdate;
     protected User owner;
@@ -42,19 +42,24 @@ public class League {
     	this.saveFile = new File("resources/leagues/" + leagueName);
     }
     
+    @Override
     public void addTeam(Team team){
     	leagueTeams.put(team.getTeamName(), 0);
     }
     
+    @Override
     public void removeTeam(Team team){
     	leagueTeams.remove(team.getTeamName());
     }
     
+    @Override
     public boolean update(String filename){
     	//Update file format yet to be set
     	lastUpdate = new Date();
     	return false;
     }
+    
+    @Override
     public boolean save(){
     	/* 
     	 * Save File Format
