@@ -3,7 +3,7 @@ package stats;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subject {
+public abstract class Subject {
 	protected List<Observer> observers = new ArrayList<Observer>();
 	
 	public void notifyAllObservers(){
@@ -19,4 +19,6 @@ public class Subject {
 	public void dettach(Observer o){
 		observers.remove(o);
 	}
+	
+	public abstract Object getState();
 }

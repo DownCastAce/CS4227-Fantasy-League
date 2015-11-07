@@ -9,17 +9,20 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
+import stats.Subject;
+
 public class LeagueFactory {
 
 	private static final String FILEPATH = "resources/leagues";
 	
-	public static League newLeague(User owner, String name, String sport, String roaster){
-		League result = new League(owner, name, sport, roaster);
+	public static League newLeague(User owner, String name, String sport, Subject listener){
+		Team ownerTeam = TeamFactory.load(sport, owner.getTeamName(), listener);
+		League result = new League(owner, name, ownerTeam, sport);
 		result.save();
 		return result;
 	}
 	
-	public static League load(String leagueName, String rosterName, String sport){
+	public static League load(String leagueName, String sport, Subject listener){
 		List<String> lines;
 		Date leagueDate;
 		try{
@@ -34,7 +37,7 @@ public class LeagueFactory {
 		Map<Team, Integer> teamPoints = new HashMap<>();
 		for(String line : lines) {
 			String[] teamData = line.split(",");
-			teamPoints.put(TeamFactory.load("soccer", teamData[0], rosterName), Integer.parseInt(teamData[1]));
+			teamPoints.put(TeamFactory.load("soccer", teamData[0], listener), Integer.parseInt(teamData[1]));
 		}
 		return new League(owner, leagueName, sport, leagueDate, teamPoints);
 	}

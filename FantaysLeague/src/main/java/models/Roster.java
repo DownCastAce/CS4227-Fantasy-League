@@ -10,49 +10,71 @@ import org.apache.commons.io.FileUtils;
 
 import stats.Observer;
 import stats.Stat;
+import stats.Subject;
 
 public class Roster extends Observer implements IRoster{
+	
+	private static volatile Roster instance; 
+	private final String filename = "resources/Rosters/SoccerRoster";
+    private ArrayList<SoccerPlayer> allPlayers = new ArrayList<SoccerPlayer>();
+    private Map<Integer, Stat> currentStats = new HashMap<Integer, Stat>();
 
-    private ArrayList<Player> allPlayers = new ArrayList<Player>();
-    private Map<Integer, ArrayList<Stat>> stats = new HashMap<Integer, ArrayList<Stat>>();
-
-    public Roster(String fileName) {
+    private Roster(Subject statListener) {
+    	subject = statListener;
         try {
-            List<String> players = FileUtils.readLines(new File(fileName));
+            List<String> players = FileUtils.readLines(new File(filename));
             for (String input : players) {
                 String[] player = input.split(",");
-                allPlayers.add(new Player(player[0], player[1], player[2], Double.parseDouble(player[3])));
+                allPlayers.add(new SoccerPlayer(player[0], player[1], player[2], Double.parseDouble(player[3])));
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Could not read file : " + fileName);
+            System.out.println("Could not read file : " + filename);
         }
     }
 
-    public ArrayList<Player> getAllPlayers() {
+    public ArrayList<SoccerPlayer> getAllPlayers() {
         return allPlayers;
     }
     
-    public ArrayList<Player> getPlayersAtPosition(String position){
-    	ArrayList<Player> result = new ArrayList<Player>();
-    	for(Player player: allPlayers){
+    public ArrayList<SoccerPlayer> getPlayersAtPosition(String position){
+    	ArrayList<SoccerPlayer> result = new ArrayList<SoccerPlayer>();
+    	for(SoccerPlayer player: allPlayers){
     		if(player.getPosition().equals(position))
     			result.add(player);
     	}
     	return result;
     }
     
-    public Player getPlayer(String id){
-    	for(Player p: allPlayers){
+    public SoccerPlayer getPlayer(String id){
+    	for(SoccerPlayer p: allPlayers){
     		if(p.getID().equals(id))
     			return p;
     	}
     	return null;
     }
+    
+    public static synchronized Roster getInstance(Subject subject){
+    	if(instance == null){
+    		instance = new Roster(subject);
+    		subject.attach(instance);
+    	}
+    	return instance;
+    }
+    public static synchronized Roster getInstance() throws Exception{
+    	if(instance == null){
+    		throw new Exception("Subject must be passed on first creation ");
+    	}
+    	return instance;
+    }
+
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public synchronized void update() {
+		currentStats = (Map<Integer, Stat>)subject.getState();
+	}
+	
+	public Map<Integer, Stat> getStats(){
+		return currentStats;
 	}
 }

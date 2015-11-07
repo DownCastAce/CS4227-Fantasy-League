@@ -2,11 +2,13 @@ package models;
 
 import java.util.ArrayList;
 
+import stats.Subject;
+
 public class SoccerTeam extends Team {
 	
-	public SoccerTeam(String teamname, User owner) {
-        // Create empty team.
-        super(teamname, owner);
+	public SoccerTeam(String teamname, User owner, Subject listener) {
+        // Create empty team.		
+        super(teamname, owner, listener);
         setAmountOfPlayersAllowed(15);
         budget = 100.0;
         positions.put("G", 2);
@@ -16,9 +18,9 @@ public class SoccerTeam extends Team {
 
     }
 
-    public SoccerTeam(String teamName, User owner, ArrayList<SoccerPlayer> players){
+    public SoccerTeam(String teamName, User owner, ArrayList<SoccerPlayer> players, Subject listener){
         // Load team from file.
-        super(teamName, owner);
+        super(teamName, owner, listener);
         setAmountOfPlayersAllowed(15);
         budget = 100.0;
         positions.put("G", 2);

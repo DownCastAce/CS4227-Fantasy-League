@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
+import stats.Subject;
+
 public class League {
 
     protected Date lastUpdate;
@@ -17,14 +19,15 @@ public class League {
     protected String sport;
     
     protected File SAVEFILE = new File("resources/leagues/" + leagueName);
-    
-    public League(User owner, String leagueName, String sport, String roster){
+
+    public League(User owner, String leagueName, Team ownerTeam, String sport){
     	//creating empty league
     	this.owner = owner;
     	this.lastUpdate = new Date();
     	this.leagueName = leagueName;
+    	this.sport = sport;
     	//Add the owners team.
-    	leagueTeams.put(TeamFactory.load(sport, owner.getTeamName(), roster), 0);
+    	leagueTeams.put(ownerTeam, 0);
     }
     //
     public League(User owner, String leagueName, String sport, Date lastUpdate, Map<Team, Integer> leagueTeams){
