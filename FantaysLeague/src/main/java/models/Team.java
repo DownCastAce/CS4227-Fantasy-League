@@ -77,10 +77,13 @@ public class Team {
     
     
     public boolean save() {
+    	selectPlayers = new ArrayList<Player>();
     	ArrayList<String> output = new ArrayList<String>();
     	File saveFile = new File(FILEPATH + this.teamName);
     	
     	output.add(teamName);
+    	System.out.println(teamName);
+    	
     	for(Player player: selectPlayers){
     		output.add(player.getID());
     	}

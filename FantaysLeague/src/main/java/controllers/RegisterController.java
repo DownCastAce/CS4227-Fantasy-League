@@ -3,12 +3,15 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import models.User;
 import views.InitialMenuView;
 import views.RegisterView;
+import views.SelectSportView;
 
 public class RegisterController {
 	
 	private RegisterView view;
+	private User user;
 	
 	public RegisterController(RegisterView v)
 	{
@@ -24,9 +27,8 @@ public class RegisterController {
 		public void actionPerformed(ActionEvent e)
 		{
 			ConfirmRegisterCommand c = new ConfirmRegisterCommand(view.getUsername(),view.getPassword());
-			c.execute();
-			GoBackToInitialMenuCommand confirm = new GoBackToInitialMenuCommand();
-			confirm.execute();
+			c.execute();		
+			
 			view.dispose();
 		}
 	}

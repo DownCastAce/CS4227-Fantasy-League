@@ -18,8 +18,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.Player;
+import models.SoccerPlayer;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.Font;
 
@@ -50,7 +53,7 @@ public class TeamView extends JFrame {
 	
 	//Budget Label
 	private JLabel lblBudget;
-	private JTextField textField;
+	private JTextField txtBudget;
 	private String teamName;
 	public TeamView(){
 	//set up JFrame 
@@ -97,7 +100,9 @@ public class TeamView extends JFrame {
 				"Name", "Value", "ID"
 			}
 		));
+		selectedGks.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedGks.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedGks.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		selectedDs = new JTable();
 		selectedDs.setModel(new DefaultTableModel(
@@ -109,10 +114,12 @@ public class TeamView extends JFrame {
 				{null, null, null},
 			},
 			new String[] {
-				"Name","Value", "ID"
+				"Name", "Value", "ID"
 			}
 		));
+		selectedDs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedDs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedDs.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		selectedMs = new JTable();
 		selectedMs.setModel(new DefaultTableModel(
@@ -124,10 +131,12 @@ public class TeamView extends JFrame {
 				{null, null, null},
 			},
 			new String[] {
-				"Name","Value", "ID"
+				"Name", "Value", "ID"
 			}
 		));
+		selectedMs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedMs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedMs.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		selectedFs = new JTable();
 		selectedFs.setModel(new DefaultTableModel(
@@ -137,10 +146,12 @@ public class TeamView extends JFrame {
 				{null, null, null},
 			},
 			new String[] {
-				"Name","Value", "ID"
+				"Name", "Value", "ID"
 			}
 		));
+		selectedFs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedFs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedFs.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		availablePlayers = new JTable();
 		availablePlayers.setModel(new DefaultTableModel(
@@ -185,12 +196,12 @@ public class TeamView extends JFrame {
 		lblBudget.setBounds(28, 14, 46, 14);
 		contentPane.add(lblBudget);
 		
-		textField = new JTextField();
-		textField.setText("100.0");
-		textField.setBounds(84, 11, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		textField.setEditable(false);
+		txtBudget = new JTextField();
+		txtBudget.setText("100.0");
+		txtBudget.setBounds(84, 11, 86, 20);
+		contentPane.add(txtBudget);
+		txtBudget.setColumns(10);
+		txtBudget.setEditable(false);
 		
 		btnReturn = new JButton("Return To Main Menu");
 		btnReturn.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -199,9 +210,86 @@ public class TeamView extends JFrame {
 
 	}
 	
-	public void updateGoalKeeperTable(ArrayList<Player> arrayList)
+	public void addPlayerAdditionListener(ActionListener addPlayerListener)
 	{
-		ArrayList<Player>goalkeepers = new ArrayList<Player>();
+		btnAddPlayer.addActionListener(addPlayerListener);
+	}
+	
+	public void addFilterListener(ActionListener listenForFilter)
+	{
+		comboBox.addActionListener(listenForFilter);
+	}
+	
+	public void addRemovePlayerListener(ActionListener removePlayerListener)
+	{
+		btnRemovePlayer.addActionListener(removePlayerListener);
+	}
+	
+	public void finaliseButtonListener(ActionListener finaliseTeamListener)
+	{
+		btnFinaliseTeam.addActionListener(finaliseTeamListener);
+	}
+	
+	public String getComboBoxSelection()
+	{
+		return comboBox.getSelectedItem().toString();
+	}
+	
+	public void setBudgetTextField(double a)
+	{
+		DecimalFormat df = new DecimalFormat("#.##");
+		String text = df.format(a);
+		txtBudget.setText(text);
+	}
+	
+	public int getGksSelection()
+	{
+		return selectedGks.getSelectedRow();
+	}
+	
+	public int getDsSelection()
+	{
+		return selectedDs.getSelectedRow();
+	}
+	
+	public int getMsSelection()
+	{
+		return selectedMs.getSelectedRow();
+	}
+	
+	public int getFsSelection()
+	{
+		return selectedFs.getSelectedRow();
+	}
+	
+	public String gkSelectionString()
+	{
+		return (String) selectedGks.getValueAt(selectedGks.getSelectedRow(), 2);
+	}
+	
+	public String dSelectionString()
+	{
+		return (String) selectedDs.getValueAt(selectedDs.getSelectedRow(), 2);
+	}
+	
+	public String mSelectionString()
+	{
+		return (String) selectedMs.getValueAt(selectedMs.getSelectedRow(), 2);
+	}
+	
+	public String fSelectionString()
+	{
+		return (String) selectedFs.getValueAt(selectedFs.getSelectedRow(), 2);
+	}
+	
+	public int getAvailablePlayersSelection()
+	{
+		return availablePlayers.getSelectedRow();
+	}
+	
+	public void updateGoalKeeperTable(ArrayList<SoccerPlayer> arrayList)
+	{
+		ArrayList<SoccerPlayer>goalkeepers = new ArrayList<SoccerPlayer>();
 		
 		for(int i = 0; i < arrayList.size();i++)
 			if((arrayList.get(i).getPosition()).equals("G"))
@@ -222,9 +310,9 @@ public class TeamView extends JFrame {
 		goalkeeperScrollPane.setViewportView(selectedGks);
 	}
 	
-	public void updateDefenderTable(ArrayList<Player> players)
+	public void updateDefenderTable(ArrayList<SoccerPlayer> players)
 	{
-		ArrayList<Player>defenders = new ArrayList<Player>();
+		ArrayList<SoccerPlayer>defenders = new ArrayList<SoccerPlayer>();
 		
 		for(int i = 0; i < players.size();i++)
 			if((players.get(i).getPosition()).equals("D"))
@@ -245,9 +333,9 @@ public class TeamView extends JFrame {
 		defenderScrollPane.setViewportView(selectedDs);
 	}
 	
-	public void updateMidfielderTable(ArrayList<Player> players)
+	public void updateMidfielderTable(ArrayList<SoccerPlayer> players)
 	{
-		ArrayList<Player>midfielders = new ArrayList<Player>();
+		ArrayList<SoccerPlayer>midfielders = new ArrayList<SoccerPlayer>();
 		
 		for(int i = 0; i < players.size();i++)
 			if((players.get(i).getPosition()).equals("M"))
@@ -268,9 +356,9 @@ public class TeamView extends JFrame {
 		midfielderScrollPane.setViewportView(selectedMs);
 	}
 	
-	public void updateForwardsTable(ArrayList<Player> players)
+	public void updateForwardsTable(ArrayList<SoccerPlayer> players)
 	{
-		ArrayList<Player>forwards = new ArrayList<Player>();
+		ArrayList<SoccerPlayer>forwards = new ArrayList<SoccerPlayer>();
 		
 		for(int i = 0; i < players.size();i++)
 			if((players.get(i).getPosition()).equals("F"))
@@ -289,5 +377,21 @@ public class TeamView extends JFrame {
 		selectedFs = new JTable(data,col);
 		selectedFs.getColumnModel().getColumn(2).setMinWidth(0);
 		forwardsScrollPane.setViewportView(selectedFs);
+	}
+	
+	public void updateAvailablePlayersPane(ArrayList<SoccerPlayer> list) 
+	{
+		String data [][] = new String[list.size()][3];
+		String col [] = {"Name","Position","Value"};
+			
+		for(int z = 0; z<list.size();z++)
+		{
+			data[z][0] = list.get(z).getName();
+			data[z][1] = list.get(z).getPosition();
+			data[z][2] = Double.toString(list.get(z).getValue());
+		}
+		
+		availablePlayers = new JTable(data,col);
+		availablePlayersScrollPane.setViewportView(availablePlayers);			
 	}
 }

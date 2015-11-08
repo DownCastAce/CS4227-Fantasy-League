@@ -29,7 +29,7 @@ public class TeamFactory {
 	    	
 	    	//create a list of player by iterating over ids in the list.
 	    	for(String playerId: playerIdsList)
-	    		teamPlayers.add(roster.getPlayer(playerId));
+	    		teamPlayers.add((SoccerPlayer)roster.getPlayer(playerId));
 	    	team = new SoccerTeam(teamName, teamOwner, teamPlayers);
     	}
     	return team;
