@@ -14,6 +14,7 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 public class StatUpdateListener extends Subject implements FileAlterationListener{
 
 	private Map<Integer, Stat> currentData = new HashMap<Integer, Stat>();
+	private CareTaker caretaker = new CareTaker();
 	
 	@Override
 	public void onFileChange(File file) {
@@ -27,12 +28,21 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 	public Map<Integer, Stat> getState(){
 		return currentData;		
 	}
+	public StatMomento saveState(){
+		return new StatMomento(currentData);
+	}
+	
+	public void setStateFromMomento(StatMomento momento){
+		currentData = momento.getState();
+	}
 
 	@Override
 	public void onFileCreate(File file) {
 		// Proposed file format
 		//first line "ID,stat1,stat2,stat3,stat4"
 		//all following lines "1,4,3.3,2,10"
+		
+		caretaker.add(saveState());
 		try{
 			List<String> data = FileUtils.readLines(file);
 			String statNames[] = data.remove(0).split(",");
@@ -46,6 +56,10 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 			System.out.println("IOException in onFileChange");
 		}
 		notifyAllObservers();
+	}
+	
+	public CareTaker getPreviousStates(){
+		return caretaker;
 	}
 
 	@Override
