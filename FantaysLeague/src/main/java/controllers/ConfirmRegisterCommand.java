@@ -1,5 +1,6 @@
 package controllers;
 
+import models.User;
 import models.UserFactory;
 import views.InitialMenuView;
 import views.RegisterView;
@@ -8,6 +9,7 @@ public class ConfirmRegisterCommand implements Command {
 
 	private String name;
 	private String password;
+	private User user;
 	
 	public ConfirmRegisterCommand(String n, String p){
 		name = n;
@@ -17,7 +19,11 @@ public class ConfirmRegisterCommand implements Command {
 	public void execute() {
 		// TODO Auto-generated method stub
 		UserFactory uf = new UserFactory();
-		uf.newUser(name,password);
+		user = uf.newUser(name,password);
+	}
+	
+	public User getUser(){
+		return user;
 	}
 
 }

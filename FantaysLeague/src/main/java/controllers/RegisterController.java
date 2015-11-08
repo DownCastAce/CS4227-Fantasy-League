@@ -25,8 +25,8 @@ public class RegisterController {
 		{
 			ConfirmRegisterCommand c = new ConfirmRegisterCommand(view.getUsername(),view.getPassword());
 			c.execute();
-			GoBackToInitialMenuCommand confirm = new GoBackToInitialMenuCommand();
-			confirm.execute();
+			c.getUser().setTeamName(view.getTeamName());
+			
 			view.dispose();
 		}
 	}
