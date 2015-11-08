@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import javax.swing.UIManager;
 
 public class ChatRoomView extends JFrame {
 
@@ -34,25 +35,26 @@ public class ChatRoomView extends JFrame {
 		setTitle("Chat Room");
 			
 		JPanel northPanel = new JPanel(new GridLayout(3,1));
-		northPanel.setBackground(SystemColor.desktop);
+		northPanel.setBackground(SystemColor.activeCaptionText);
 		tf = new JTextField("");
 		northPanel.add(tf);
 		getContentPane().add(northPanel, BorderLayout.NORTH);
 		getContentPane().setBackground(SystemColor.desktop);
 		// The CenterPanel which is the chat room
 		ta = new JTextArea("Welcome to Fantasy League Chatroom\n For A List Of Participants Type '-people'\n", 80, 80);
+		ta.setBackground(Color.LIGHT_GRAY);
 		JPanel centerPanel = new JPanel(new GridLayout(1,1));
 		centerPanel.add(new JScrollPane(ta));
 		ta.setEditable(false);
 		getContentPane().add(centerPanel, BorderLayout.CENTER);
 
 		JPanel leftPanel = new JPanel();
-		leftPanel.setBackground(SystemColor.desktop);
+		leftPanel.setBackground(SystemColor.activeCaptionText);
 		leftPanel.setPreferredSize(new Dimension(100,600));
 		getContentPane().add(leftPanel, BorderLayout.WEST);
 		
 		JPanel southPanel = new JPanel();
-		southPanel.setBackground(SystemColor.desktop);
+		southPanel.setBackground(SystemColor.activeCaptionText);
 		getContentPane().add(southPanel, BorderLayout.SOUTH);
 		btnLeave = new JButton("Back To Main Menu");// you have to login before being able to logout
 		btnLeave.setFont(new Font("Tahoma", Font.BOLD, 11));

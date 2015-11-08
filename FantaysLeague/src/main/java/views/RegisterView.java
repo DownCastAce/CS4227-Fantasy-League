@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.Font;
 
 public class RegisterView extends JFrame {
 
@@ -26,19 +28,23 @@ public class RegisterView extends JFrame {
 		setBounds(100, 100, 450, 158);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.activeCaptionText);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblEnterAUsername = new JLabel("Enter A Username:");
+		lblEnterAUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEnterAUsername.setBounds(10, 11, 109, 14);
 		contentPane.add(lblEnterAUsername);
 		
 		JLabel lblEnterAPassword = new JLabel("Enter A Password:");
+		lblEnterAPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEnterAPassword.setBounds(10, 36, 109, 14);
 		contentPane.add(lblEnterAPassword);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password:");
+		lblConfirmPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblConfirmPassword.setBounds(10, 61, 109, 14);
 		contentPane.add(lblConfirmPassword);
 		
@@ -58,10 +64,12 @@ public class RegisterView extends JFrame {
 		txtConfPassword.setColumns(10);
 		
 		btnConfirm = new JButton("Confirm");
+		btnConfirm.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnConfirm.setBounds(195, 92, 91, 23);
 		contentPane.add(btnConfirm);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCancel.setBounds(296, 92, 91, 23);
 		contentPane.add(btnCancel);
 	}

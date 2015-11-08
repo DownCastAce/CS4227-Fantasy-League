@@ -9,17 +9,19 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
+import stats.Subject;
+
 public class LeagueFactory {
 
 	private static final String FILEPATH = "resources/leagues/";
 	
-	public static ILeague newLeague(User owner, String leagueName, String sport){
-		ILeague result = new League(owner, leagueName, sport);
+	public static League newLeague(User owner, String name, String sport, Subject listener){
+		League result = new League(owner, name, sport);
 		result.save();
 		return result;
 	}
 	
-	public static ILeague load(String leagueName, String sport){
+	public static League load(String leagueName, String sport, Subject listener){
 		List<String> lines;
 		Date leagueDate;
 		try{

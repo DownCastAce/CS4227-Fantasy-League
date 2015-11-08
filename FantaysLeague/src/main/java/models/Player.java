@@ -1,14 +1,16 @@
 package models;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Player {
+import stats.*;
+
+public class Player{
     protected String name;
     protected String ID;
     protected String position;
     protected boolean playable;
     protected double value;
-    protected HashMap<String, Integer> stats;
 
     public Player(String anID, String aName, String aPosition, double aValue) {
         this.ID = anID;
@@ -16,7 +18,7 @@ public class Player {
         this.position = aPosition;
         this.value = aValue;
     }
- 
+
     public String getID() {
         return ID;
     }
@@ -44,5 +46,4 @@ public class Player {
     public void setValue(int value) {
         this.value = value;
     }
-
 }

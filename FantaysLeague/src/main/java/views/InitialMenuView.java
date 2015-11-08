@@ -27,7 +27,7 @@ public class InitialMenuView extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(SystemColor.activeCaptionText);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
