@@ -19,14 +19,13 @@ public class MainMenuView extends JFrame {
 	private JPanel contentPane;
 	private JButton btnLeague;
 	private JButton btnViewTeam;
-	private JButton btnCreateTeam;
 	private JButton btnChatRoom;
 	
 	public MainMenuView() {
 		setBackground(Color.LIGHT_GRAY);
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 659, 406);
+		setBounds(100, 100, 659, 354);
 		setLocationRelativeTo(null);
 		
 		contentPane = new JPanel();
@@ -35,30 +34,20 @@ public class MainMenuView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		btnCreateTeam = new JButton("Create Team");
-		btnCreateTeam.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCreateTeam.setBounds(39, 35, 537, 51);
-		contentPane.add(btnCreateTeam);
-		
 		btnViewTeam = new JButton("View Team/Transfers");
 		btnViewTeam.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnViewTeam.setBounds(39, 123, 537, 51);
+		btnViewTeam.setBounds(39, 42, 537, 51);
 		contentPane.add(btnViewTeam);
 		
 		btnLeague = new JButton("View League");
 		btnLeague.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnLeague.setBounds(39, 217, 537, 51);
+		btnLeague.setBounds(39, 133, 537, 51);
 		contentPane.add(btnLeague);
 		
 		btnChatRoom = new JButton("Chat Room");
 		btnChatRoom.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnChatRoom.setBounds(39, 298, 537, 51);
+		btnChatRoom.setBounds(39, 232, 537, 51);
 		contentPane.add(btnChatRoom);
-	}
-	
-	public void addCreateTeamListener(ActionListener createTeamListener)
-	{
-		btnCreateTeam.addActionListener(createTeamListener);
 	}
 	
 	public void addViewTeamListener(ActionListener viewTeamListener)
