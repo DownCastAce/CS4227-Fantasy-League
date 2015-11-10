@@ -16,7 +16,15 @@ public class TeamFactory {
     	Team team = null;
     	if(sport.equals("soccer")){
     		ArrayList<SoccerPlayer> teamPlayers =  new ArrayList<SoccerPlayer>();
-	    	Roster roster = Roster.getInstance(listener);
+    		ArrayList<SoccerPlayer> RosterPlayers =  new ArrayList<SoccerPlayer>();
+
+			Roster roster = Roster.getInstance(listener);
+			RosterPlayers = roster.getAllPlayers();
+			SoccerPlayer p;
+			
+	    	for(int i = 0; i < 0; i++)
+	    		System.out.println(RosterPlayers.get(i).getName());
+	    	
 	    	List<String> playerIdsList;
 	    	
 	    	//load file into List
@@ -26,12 +34,14 @@ public class TeamFactory {
 				e.printStackTrace();
 				return null;
 			}
+	    	
 	    	//Create user based on the first line of the list
 	    	User teamOwner = UserFactory.load(playerIdsList.remove(0));
 	    	
 	    	//create a list of player by iterating over ids in the list.
-	    	for(String playerId: playerIdsList)
+	    	for(String playerId: playerIdsList)	    	
 	    		teamPlayers.add((SoccerPlayer)roster.getPlayer(playerId));
+	    	
 	    	team = new SoccerTeam(teamName, teamOwner, teamPlayers, listener);
 	    	listener.attach(team);
     	}

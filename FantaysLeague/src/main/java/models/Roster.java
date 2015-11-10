@@ -25,7 +25,7 @@ public class Roster extends Observer implements IRoster{
             List<String> players = FileUtils.readLines(new File(filename));
             for (String input : players) {
                 String[] player = input.split(",");
-                allPlayers.add(new SoccerPlayer(player[0], player[1], player[2], Double.parseDouble(player[3])));
+                allPlayers.add(new SoccerPlayer(player[0], player[2], player[1], Double.parseDouble(player[4])));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,8 +49,11 @@ public class Roster extends Observer implements IRoster{
     public SoccerPlayer getPlayer(String id){
     	for(SoccerPlayer p: allPlayers){
     		if(p.getID().equals(id))
+    		{
     			return p;
+    		}
     	}
+    	System.out.println("Player Doesn't Exsist.");
     	return null;
     }
     
