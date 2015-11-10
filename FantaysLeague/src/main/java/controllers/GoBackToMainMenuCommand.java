@@ -1,13 +1,14 @@
 package controllers;
 
 import models.IUser;
+import models.User;
 import views.MainMenuView;
 
 public class GoBackToMainMenuCommand implements Command {
 
-	private IUser user;
+	private User user;
 	
-	public GoBackToMainMenuCommand(IUser user){
+	public GoBackToMainMenuCommand(User user){
 		this.user = user;
 	}
 	@Override

@@ -9,13 +9,14 @@ import org.apache.commons.io.FileUtils;
 public class UserFactory {
 	private static final String USERS_FILEPATH = "resources/users/";
 
-	public User newUser(String userName, String password){
-		User user = new User(userName, password);
+	public User newUser(String userName, String password, String teamName){
+		User user = new User(userName, password, teamName);
 		user.save();
 		return user;
 	}
 	
 	public static User load(String userName){
+		//System.out.println("USERNAME: " + userName);
 		try{
 			//UserInfo = {NAME, PASSWORD, TEAM}
 			String[] userInfo = FileUtils.readFileToString(new File(USERS_FILEPATH + userName)).split(",");

@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.monitor.FileAlterationListener;
+import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 
 public class StatUpdateListener extends Subject implements FileAlterationListener{
@@ -80,4 +81,5 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 	public void onDirectoryDelete(File arg0) {/*Do nothing*/}
 	@Override
 	public void onFileDelete(File arg0) {/*Do nothing*/}
+
 }
