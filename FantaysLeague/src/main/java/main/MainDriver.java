@@ -5,16 +5,19 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import controllers.InitialMenuController;
 import views.InitialMenuView;
+import stats.Stat;
 import stats.StatUpdateListener;
 import stats.Subject;
 import models.Roster;
 
 public class MainDriver {
 	
-	final static String statFilepath = "resources/users/";
+	final static String statFilepath = "resources/stats/";
 	final static String rosterFilepath = "resources/Rosters/";
 	final static File resFolder = new File(statFilepath);
 	public static Subject statListener = null;
@@ -22,10 +25,14 @@ public class MainDriver {
 	public static void main(String [] args){
 		
 		statListener = setupFileMonitor(resFolder, 5000);
-		statListener.attach(Roster.getInstance(statListener));
+		Roster roster = Roster.getInstance(statListener);
+		statListener.attach(roster);
+		Map<Integer, List<Stat>> stats = roster.getStats();
+
+
 		
-		InitialMenuView v = new InitialMenuView();
-		InitialMenuController con = new InitialMenuController(v);
+		//InitialMenuView v = new InitialMenuView();
+		//InitialMenuController con = new InitialMenuController(v);
 	
 	}
 	

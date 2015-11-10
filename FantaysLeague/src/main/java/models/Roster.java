@@ -17,7 +17,7 @@ public class Roster extends Observer implements IRoster{
 	private static volatile Roster instance; 
 	private final String filename = "resources/Rosters/SoccerRoster";
     private ArrayList<SoccerPlayer> allPlayers = new ArrayList<SoccerPlayer>();
-    private Map<Integer, Stat> currentStats = new HashMap<Integer, Stat>();
+    private Map<Integer, List<Stat>> currentStats = new HashMap<Integer, List<Stat>>();
 
     private Roster(Subject statListener) {
     	subject = statListener;
@@ -74,10 +74,10 @@ public class Roster extends Observer implements IRoster{
 
 	@Override
 	public synchronized void update() {
-		currentStats = (Map<Integer, Stat>)subject.getState();
+		currentStats = (Map<Integer, List<Stat>>)subject.getState();
 	}
 	
-	public Map<Integer, Stat> getStats(){
+	public Map<Integer, List<Stat>> getStats(){
 		return currentStats;
 	}
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -182,11 +183,12 @@ public class SoccerTeam extends Team {
 
 		@Override
 		public synchronized void update() {
-			Map<Integer, Stat> stats = (Map<Integer, Stat>)subject.getState();
-			for(Map.Entry<Integer, Stat> stat : stats.entrySet()){
+			Map<Integer, List<Stat>> stats = (Map<Integer, List<Stat>>)subject.getState();
+			for(Map.Entry<Integer, List<Stat>> statList : stats.entrySet()){
 				for(Player player: selectPlayers)
-					if(stat.getKey() == Integer.parseInt(player.getID())){
-						totalPoints += stat.getValue().getScore();
+					if(statList.getKey() == Integer.parseInt(player.getID())){
+						for(Stat stat: statList.getValue())
+							totalPoints += stat.getScore();
 					}
 			}
 			save();
