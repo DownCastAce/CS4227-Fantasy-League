@@ -17,14 +17,15 @@ public class MainDriver {
 	final static String statFilepath = "resources/users/";
 	final static String rosterFilepath = "resources/Rosters/";
 	final static File resFolder = new File(statFilepath);
+	public static Subject statListener = null;
 	
 	public static void main(String [] args){
-
-		Subject subject = setupFileMonitor(resFolder, 5000);
-		subject.attach(Roster.getInstance(subject));
 		
-		//InitialMenuView v = new InitialMenuView();
-		//InitialMenuController con = new InitialMenuController(v);
+		statListener = setupFileMonitor(resFolder, 5000);
+		statListener.attach(Roster.getInstance(statListener));
+		
+		InitialMenuView v = new InitialMenuView();
+		InitialMenuController con = new InitialMenuController(v);
 	
 	}
 	

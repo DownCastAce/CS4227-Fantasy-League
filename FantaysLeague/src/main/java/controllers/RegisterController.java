@@ -3,12 +3,20 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import main.MainDriver;
+import models.Roster;
+import models.SoccerTeam;
+import models.TeamFactory;
+import models.User;
+import stats.Subject;
 import views.InitialMenuView;
 import views.RegisterView;
 
 public class RegisterController {
 	
 	private RegisterView view;
+	private User user;
+	private SoccerTeam team;
 	
 	public RegisterController(RegisterView v)
 	{
@@ -22,11 +30,17 @@ public class RegisterController {
 	class ListenForConfirm implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e)
-		{
-			ConfirmRegisterCommand c = new ConfirmRegisterCommand(view.getUsername(),view.getPassword());
+		{	
+			ConfirmRegisterCommand c = new ConfirmRegisterCommand(view.getUsername(),view.getPassword(), view.getTeamName());
 			c.execute();
-			GoBackToInitialMenuCommand confirm = new GoBackToInitialMenuCommand();
-			confirm.execute();
+			user = c.getUser();
+			user.setTeamName(view.getTeamName());
+			
+			TeamFactory tf = new TeamFactory();
+			team = (SoccerTeam) tf.newTeam("soccer", user.getTeamName(), user, MainDriver.statListener);
+			GoToTeamView command = new GoToTeamView(team, user);
+			command.execute();
+			
 			view.dispose();
 		}
 	}

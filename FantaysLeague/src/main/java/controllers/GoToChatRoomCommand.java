@@ -1,15 +1,16 @@
 package controllers;
 
 import models.IUser;
+import models.User;
 import views.ChatRoomView;
 import views.MainMenuView;
 
 public class GoToChatRoomCommand implements Command {
 
-	private IUser user;
+	private User user;
 	private MainMenuView view;
 	
-	public GoToChatRoomCommand(IUser u, MainMenuView v)
+	public GoToChatRoomCommand(User u, MainMenuView v)
 	{
 		user = u;
 		view = v;

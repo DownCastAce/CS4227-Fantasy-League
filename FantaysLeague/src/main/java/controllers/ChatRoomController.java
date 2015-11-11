@@ -8,12 +8,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 import models.IUser;
+import models.User;
 import views.ChatRoomView;
 
 public class ChatRoomController {
 	
 	private ChatRoomView view;
-	private IUser user;
+	private User user;
 	
 	private ObjectInputStream sInput;		// to read from the socket
 	private ObjectOutputStream sOutput;		// to write on the socket
@@ -26,7 +27,7 @@ public class ChatRoomController {
 	private String msg;
 
 	
-	public ChatRoomController(IUser user, ChatRoomView view)
+	public ChatRoomController(User user, ChatRoomView view)
 	{
 		this.user = user;
 		this.view = view;
