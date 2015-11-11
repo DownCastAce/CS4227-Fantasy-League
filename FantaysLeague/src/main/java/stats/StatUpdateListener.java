@@ -14,7 +14,7 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 
 public class StatUpdateListener extends Subject implements FileAlterationListener{
 
-	private Map<Integer, Stat> currentData = new HashMap<Integer, Stat>();
+	private Map<Integer, List<Stat>> currentData = new HashMap<Integer, List<Stat>>();
 	private CareTaker caretaker = new CareTaker();
 	
 	@Override
@@ -26,7 +26,7 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 		}
 	}
 	
-	public Map<Integer, Stat> getState(){
+	public Map<Integer, List<Stat>> getState(){
 		return currentData;		
 	}
 	public StatMomento saveState(){
@@ -41,21 +41,28 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 	public void onFileCreate(File file) {
 		// Proposed file format
 		//first line "ID,stat1,stat2,stat3,stat4"
-		//all following lines "1,4,3.3,2,10"
-		
-		caretaker.add(saveState());
+		//all following lines "1,4,3.3,2,10		
 		try{
-			List<String> data = FileUtils.readLines(file);
-			String statNames[] = data.remove(0).split(",");
-			for(String line : data){
-				String stat[] =  line.split(",");
-				for(int i = 0; i < stat.length-1;i++)
-					currentData.put(Integer.parseInt(stat[0]), new Stat(statNames[i-1], 1, Double.parseDouble(stat[i])));
-			}
 			System.out.println("File created: " + file.getCanonicalPath());
+			if(!file.getName().endsWith(".stat")){
+				System.out.println("Not of correct type, ignoring");
+				return;
+			}
+			caretaker.add(saveState());
+			List<String> data = FileUtils.readLines(file);
+			String statNames[] = data.remove(0).split(",");		
+			for(String line : data){
+				ArrayList<Stat> temp = new ArrayList<Stat>();
+				String stat[] =  line.split(",");
+				for(int i = 1; i < stat.length;i++)
+					temp.add(new Stat(statNames[i], 1, Double.parseDouble(stat[i])));
+				currentData.put(Integer.parseInt(stat[0]), temp);
+			}
+
 		}catch(IOException e){
 			System.out.println("IOException in onFileChange");
 		}
+
 		notifyAllObservers();
 	}
 	

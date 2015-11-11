@@ -14,6 +14,8 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class Team extends Observer{
 	
+	public abstract String getTeamName();
+	
     public abstract boolean save();
         
 }
