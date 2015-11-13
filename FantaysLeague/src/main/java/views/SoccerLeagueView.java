@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 import models.League;
 import models.SoccerTeam;
 import models.Team;
+import stats.CareTaker;
+import stats.StatMomento;
 
 public class SoccerLeagueView extends JFrame {
 
@@ -45,11 +48,14 @@ public class SoccerLeagueView extends JFrame {
 	    }
 
 	    private String[][] getLeagueTable(League currentLeague) {
-	        Set<SoccerTeam> leagueTeams = currentLeague.getLeagueTeams();
-	        String[][] leagueTable = new String[leagueTeams.size()][4];
+	    	CareTaker leagueHistory = currentLeague.getCareTaker();
+	        StatMomento statsMomento = leagueHistory.get(leagueHistory.size()-1);
+	        Map<String, Integer> stats = statsMomento.getState();
+	        String[][] leagueTable = new String[stats.size()][4];
 	        int i = 1;
+
 	        
-	        for(SoccerTeam t : leagueTeams)
+	        for(int i = 0;i < c
 	        {
 	        	leagueTable[i-1][0] = ""+ (i);
 	            leagueTable[i-1][1] = t.getTeamName();

@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class StatMomento {
 	
-	private Map<Integer, List<Stat>> state;
+	private Map<String, Integer> state;
 	
-	public StatMomento(Map<Integer, List<Stat>> state){
+	public StatMomento(Map<String, Integer> state){
 		this.state = state;
 	}
 	
-	public Map<Integer, List<Stat>> getState(){
+	public Map<String, Integer> getState(){
 		return state;
 	}
 }

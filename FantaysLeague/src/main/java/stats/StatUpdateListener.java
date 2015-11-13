@@ -29,13 +29,6 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 	public Map<Integer, List<Stat>> getState(){
 		return currentData;		
 	}
-	public StatMomento saveState(){
-		return new StatMomento(currentData);
-	}
-	
-	public void setStateFromMomento(StatMomento momento){
-		currentData = momento.getState();
-	}
 
 	@Override
 	public void onFileCreate(File file) {
@@ -48,7 +41,6 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 				System.out.println("Not of correct type, ignoring");
 				return;
 			}
-			caretaker.add(saveState());
 			List<String> data = FileUtils.readLines(file);
 			String statNames[] = data.remove(0).split(",");		
 			for(String line : data){
@@ -64,10 +56,6 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 		}
 
 		notifyAllObservers();
-	}
-	
-	public CareTaker getPreviousStates(){
-		return caretaker;
 	}
 
 	@Override

@@ -13,4 +13,8 @@ public class CareTaker {
 	public StatMomento get(int index){
 		return momentoList.get(index);
 	}
+	
+	public int size(){
+		return momentoList.size();
+	}
 }
