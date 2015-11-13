@@ -9,11 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import controllers.InitialMenuController;
+import controllers.LeagueController;
 import views.InitialMenuView;
 import stats.Stat;
 import stats.StatUpdateListener;
 import stats.Subject;
+import models.League;
+import models.LeagueFactory;
 import models.Roster;
+import models.SoccerTeam;
 
 public class MainDriver {
 	
@@ -29,11 +33,9 @@ public class MainDriver {
 		statListener.attach(roster);
 		Map<Integer, List<Stat>> stats = roster.getStats();
 
+		InitialMenuView v = new InitialMenuView();
+		InitialMenuController con = new InitialMenuController(v);
 
-		
-		//InitialMenuView v = new InitialMenuView();
-		//InitialMenuController con = new InitialMenuController(v);
-	
 	}
 	
 	public static Subject setupFileMonitor(File folder, int pollingMsecs){

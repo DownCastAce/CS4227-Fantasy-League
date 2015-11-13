@@ -120,7 +120,7 @@ public class ChatRoomController {
 			sOutput.writeObject("LOGOUT");
 		}
 		catch(IOException e) {
-			
+			System.out.println("Logged Out");
 		}
 	}
 	
@@ -140,7 +140,11 @@ public class ChatRoomController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			Logout();
+			
+			if(connected){
+				Logout();			
+			}
+			
 			GoBackToMainMenuCommand com = new GoBackToMainMenuCommand(user);
 			view.dispose();
 			com.execute();

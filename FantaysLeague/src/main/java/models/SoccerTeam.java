@@ -55,9 +55,6 @@ public class SoccerTeam extends Team {
 		positions.put("D", 5);
 		positions.put("M", 5);
 		positions.put("F", 3);
-		
-		for(int i = 0; i < players.size(); i++)
-			System.out.println(players.get(i).getName());
 
 		selectPlayers.addAll(players);
 
@@ -69,6 +66,10 @@ public class SoccerTeam extends Team {
 		return selectPlayers;
 	}
 
+	public int getTotalPoints(){
+		return totalPoints;
+	}
+	
 	public int getAmountOfPlayersAllowed() {
 		return amountOfPlayersAllowed;
 	}
