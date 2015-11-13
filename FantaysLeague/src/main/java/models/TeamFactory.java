@@ -21,9 +21,6 @@ public class TeamFactory {
 			Roster roster = Roster.getInstance(listener);
 			RosterPlayers = roster.getAllPlayers();
 			SoccerPlayer p;
-			
-	    	for(int i = 0; i < 0; i++)
-	    		System.out.println(RosterPlayers.get(i).getName());
 	    	
 	    	List<String> playerIdsList;
 	    	

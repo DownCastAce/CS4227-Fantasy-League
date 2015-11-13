@@ -13,11 +13,11 @@ import stats.Subject;
 
 public class LeagueFactory {
 
-	private static final String FILEPATH = "resources/leagues";
+	private static final String FILEPATH = "resources/leagues/";
 	
 	public static League newLeague(User owner, String name, String sport, Subject listener){
 		Team ownerTeam = TeamFactory.load(sport, owner.getTeamName(), listener);
-		League result = new League(owner, name, ownerTeam, sport);
+		League result = new League(owner, name, (SoccerTeam) ownerTeam, sport);
 		result.save();
 		return result;
 	}
@@ -34,10 +34,10 @@ public class LeagueFactory {
 		
 		User owner = UserFactory.load(lines.remove(0));
 		
-		Map<Team, Integer> teamPoints = new HashMap<>();
+		Map<SoccerTeam, Integer> teamPoints = new HashMap<>();
 		for(String line : lines) {
 			String[] teamData = line.split(",");
-			teamPoints.put(TeamFactory.load("soccer", teamData[0], listener), Integer.parseInt(teamData[1]));
+			teamPoints.put((SoccerTeam) TeamFactory.load("soccer", teamData[0], listener), Integer.parseInt(teamData[1]));
 		}
 		return new League(owner, leagueName, sport, leagueDate, teamPoints);
 	}

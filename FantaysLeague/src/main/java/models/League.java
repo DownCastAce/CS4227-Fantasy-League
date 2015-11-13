@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 
@@ -14,13 +15,13 @@ public class League {
 
     protected Date lastUpdate;
     protected User owner;
-    protected Map<Team, Integer> leagueTeams;
+    protected Map<SoccerTeam, Integer> leagueTeams;
     protected String leagueName;
     protected String sport;
     
     protected File SAVEFILE = new File("resources/leagues/" + leagueName);
 
-    public League(User owner, String leagueName, Team ownerTeam, String sport){
+    public League(User owner, String leagueName, SoccerTeam ownerTeam, String sport){
     	//creating empty league
     	this.owner = owner;
     	this.lastUpdate = new Date();
@@ -30,7 +31,7 @@ public class League {
     	leagueTeams.put(ownerTeam, 0);
     }
     //
-    public League(User owner, String leagueName, String sport, Date lastUpdate, Map<Team, Integer> leagueTeams){
+    public League(User owner, String leagueName, String sport, Date lastUpdate, Map<SoccerTeam, Integer> leagueTeams){
     	//Loading league
     	this.sport = sport;
     	this.owner = owner;
@@ -41,7 +42,15 @@ public class League {
     	this.leagueTeams = leagueTeams;
     }
     
-    public void addTeam(Team team){
+    public String getLeagueName(){
+    	return leagueName;
+    }
+    
+    public Set<SoccerTeam> getLeagueTeams(){
+    	return leagueTeams.keySet();
+    }
+    
+    public void addTeam(SoccerTeam team){
     	leagueTeams.put(team, 0);
     }
     
@@ -64,7 +73,7 @@ public class League {
     	 * team2
     	 */
     	ArrayList<String> output = new ArrayList<String>();
-    	for(Map.Entry<Team, Integer> entry: leagueTeams.entrySet()){
+    	for(Map.Entry<SoccerTeam, Integer> entry: leagueTeams.entrySet()){
     		output.add(entry.getKey() + "," + entry.getValue());
     	}
     	
