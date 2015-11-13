@@ -5,12 +5,18 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 import controllers.InitialMenuController;
+import controllers.LeagueController;
 import views.InitialMenuView;
+import views.SoccerLeagueView;
 import stats.StatUpdateListener;
 import stats.Subject;
+import models.League;
+import models.LeagueFactory;
 import models.Roster;
+import models.SoccerTeam;
 
 public class MainDriver {
 	
@@ -26,7 +32,6 @@ public class MainDriver {
 		
 		InitialMenuView v = new InitialMenuView();
 		InitialMenuController con = new InitialMenuController(v);
-	
 	}
 	
 	public static Subject setupFileMonitor(File folder, int pollingMsecs){
