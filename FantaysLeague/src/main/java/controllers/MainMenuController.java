@@ -57,7 +57,7 @@ public class MainMenuController {
 	class ViewLeagueListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0){
-			League league = LeagueFactory.load("MyLeague", "soccer", MainDriver.statListener);
+			League league = LeagueFactory.load("GlobalLeague", "soccer", MainDriver.statListener);
 			
 			GoToLeagueViewCommand con = new GoToLeagueViewCommand(league,user);
 			con.execute();

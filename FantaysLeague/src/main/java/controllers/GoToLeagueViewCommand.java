@@ -17,7 +17,7 @@ public class GoToLeagueViewCommand implements Command{
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
-		SoccerLeagueView view = new SoccerLeagueView(league);
+		SoccerLeagueView view = new SoccerLeagueView();
 		LeagueController control = new LeagueController(league, view,user);
 	}
 
