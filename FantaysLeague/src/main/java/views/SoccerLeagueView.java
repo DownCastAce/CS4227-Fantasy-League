@@ -24,22 +24,19 @@ public class SoccerLeagueView extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel viewPanel;
+	private JTable leagueTableView;
+	private JScrollPane scroll;
 
 	 private JButton btnReturnToMainMenu;
 
-	    public SoccerLeagueView(League currentLeague) {
+	    public SoccerLeagueView() {
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        viewPanel = new JPanel();
 	        this.setSize(800, 600);
 	        setLocationRelativeTo(null);
-	        this.setTitle(currentLeague.getLeagueName());
 
-	        String[] leagueheaders = { "Position", "Team Name", "Manager", "Total Points" };
-
-	        JTable information = new JTable(getLeagueTable(currentLeague),leagueheaders);
-
-	        JScrollPane scroll = new JScrollPane(information);
-	        viewPanel.add(scroll);
+	       scroll = new JScrollPane();
+	       viewPanel.add(scroll);
 	        
 	        btnReturnToMainMenu = new JButton("Return to main menu");
 	        btnReturnToMainMenu.setBounds(400, 300, 100, 50);
@@ -47,30 +44,31 @@ public class SoccerLeagueView extends JFrame {
 	        this.add(viewPanel);
 	    }
 
-	    private String[][] getLeagueTable(League currentLeague) {
-	    	CareTaker leagueHistory = currentLeague.getCareTaker();
-	        StatMomento statsMomento = leagueHistory.get(leagueHistory.size()-1);
-	        Map<String, Integer> stats = statsMomento.getState();
-	        String[][] leagueTable = new String[stats.size()][4];
-	        int i = 1;
-
-	        
-	        for(int i = 0;i < c
-	        {
-	        	leagueTable[i-1][0] = ""+ (i);
-	            leagueTable[i-1][1] = t.getTeamName();
-	            leagueTable[i-1][2] = t.getOwner().getUserName();
-	            leagueTable[i-1][3] = Integer.toString(t.getTotalPoints());
-	            i++;
-	        }
-	        
-	        return leagueTable;
-
+	    public void setTitle(League currentLeague){
+	    	this.setTitle(currentLeague.getLeagueName());
 	    }
+	    
 	    
 	    public void addReturnListener(ActionListener listenForReturn)
 	    {
 	        btnReturnToMainMenu.addActionListener(listenForReturn);
+	    }
+	    
+	    public void updateLeagueTable(Map<SoccerTeam,Integer> leagueTeams){
+	    	String leagueTable[][] = new String[leagueTeams.size()][4];
+	    	String[] leagueheaders = { "Position", "Team Name", "Manager", "Total Points" };
+	    	int i = 1;
+
+	    	for(Map.Entry<SoccerTeam, Integer> t : leagueTeams.entrySet()){
+	    		leagueTable[i-1][0] = ""+ (i);
+	            leagueTable[i-1][1] = t.getKey().getTeamName();
+	            leagueTable[i-1][2] = t.getKey().getOwner().getUserName();
+	            leagueTable[i-1][3] = Integer.toString(t.getValue());
+	            i++;
+	    	}
+	    	  leagueTableView = new JTable(leagueTable, leagueheaders);
+	    	  scroll.setViewportView(leagueTableView);
+	    	  
 	    }
 
 }

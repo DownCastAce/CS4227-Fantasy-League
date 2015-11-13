@@ -30,7 +30,7 @@ public class LeagueFactory {
 		}catch(IOException e){
 			return null;
 		}
-		
+			
 		User owner = UserFactory.load(lines.remove(0));
 		
 		Map<SoccerTeam, Integer> teamPoints = new HashMap<>();

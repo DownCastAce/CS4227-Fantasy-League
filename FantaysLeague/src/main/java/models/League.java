@@ -23,7 +23,7 @@ public class League {
     protected String leagueName;
     protected String sport;
     
-    protected File SAVEFILE = new File("resources/leagues/" + leagueName);
+    protected File SAVEFILE;
 
     public League(User owner, String leagueName, SoccerTeam ownerTeam, String sport){
     	//creating empty league
@@ -89,14 +89,16 @@ public class League {
     	 * team1
     	 * team2
     	 */
+    	SAVEFILE = new File("resources/leagues/" + leagueName);
     	ArrayList<String> output = new ArrayList<String>();
     	for(Map.Entry<SoccerTeam, Integer> entry: leagueTeams.entrySet()){
-    		output.add(entry.getKey() + "," + entry.getValue());
+    		output.add(entry.getKey().getTeamName() + "," + entry.getValue());
     	}
-    	
+    	System.out.println("PATH: " + SAVEFILE);
     	try {
     		FileUtils.write(SAVEFILE, owner.getUserName());
-    		FileUtils.writeLines(SAVEFILE, output);
+    		FileUtils.write(SAVEFILE, "\n",true);
+    		FileUtils.writeLines(SAVEFILE, output,true);
     	} catch(IOException e) {
     		return false;
     	}

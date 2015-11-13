@@ -21,6 +21,8 @@ public class LeagueController {
 		view.addReturnListener(new ListenForReturn());
 		
 		view.setVisible(true);
+		
+		view.updateLeagueTable(league.getLeagueTeams());
 	}
 
 	class ListenForReturn implements ActionListener{

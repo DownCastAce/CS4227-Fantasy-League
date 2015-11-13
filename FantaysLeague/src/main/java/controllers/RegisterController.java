@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import main.MainDriver;
+import models.League;
+import models.LeagueFactory;
 import models.Roster;
 import models.SoccerTeam;
 import models.TeamFactory;
@@ -35,12 +37,12 @@ public class RegisterController {
 			c.execute();
 			user = c.getUser();
 			user.setTeamName(view.getTeamName());
+		
+			team = (SoccerTeam) TeamFactory.newTeam("soccer", user.getTeamName(), user, MainDriver.statListener);
 			
-			TeamFactory tf = new TeamFactory();
-			team = (SoccerTeam) tf.newTeam("soccer", user.getTeamName(), user, MainDriver.statListener);
 			GoToTeamView command = new GoToTeamView(team, user);
 			command.execute();
-			
+					
 			view.dispose();
 		}
 	}
