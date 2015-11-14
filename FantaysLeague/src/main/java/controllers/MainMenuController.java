@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import main.MainDriver;
 import models.IUser;
+import models.League;
+import models.LeagueFactory;
 import models.SoccerTeam;
 import models.Team;
 import models.TeamFactory;
@@ -15,7 +17,6 @@ public class MainMenuController {
 
 	private User user;
 	private MainMenuView view;
-	private SoccerTeam team;
 	
 	public MainMenuController(User u, MainMenuView v){
 		user = u;
@@ -24,7 +25,7 @@ public class MainMenuController {
 		view.setVisible(true);
 		
 		view.addChatRoomListener(new ChatRoomListener());
-		//view.addViewLeagueListener(new ViewLeagueListener());
+		view.addViewLeagueListener(new ViewLeagueListener());
 		view.addViewTeamListener(new ViewTeamListener());
 	}
 	
@@ -45,11 +46,23 @@ public class MainMenuController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			team = (SoccerTeam)TeamFactory.load("soccer", user.getTeamName(), MainDriver.statListener);
+			SoccerTeam team = (SoccerTeam)TeamFactory.load("soccer", user.getTeamName(), MainDriver.statListener);
 						
 			GoToTeamView com = new GoToTeamView(team,user);
 			com.execute();
 		}
 		
+	}
+	
+	class ViewLeagueListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0){
+			League league = LeagueFactory.load("GlobalLeague", "soccer", MainDriver.statListener);
+			
+			GoToLeagueViewCommand con = new GoToLeagueViewCommand(league,user);
+			con.execute();
+			
+			view.dispose();
+		}
 	}
 }

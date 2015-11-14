@@ -224,6 +224,10 @@ public class SoccerTeamView extends JFrame {
 	{
 		btnFinaliseTeam.addActionListener(finaliseTeamListener);
 	}
+	public void addReturnListener(ActionListener returnListener)
+	{
+		btnReturn.addActionListener(returnListener);
+	}
 	
 	public String getComboBoxSelection()
 	{
