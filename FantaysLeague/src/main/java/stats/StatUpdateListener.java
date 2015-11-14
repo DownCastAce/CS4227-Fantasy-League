@@ -60,12 +60,12 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 
 	@Override
 	public void onStart(FileAlterationObserver observer) {
-		System.out.println("Listening on folder: " + observer.getDirectory());
+		//System.out.println("Listening on folder: " + observer.getDirectory());
 	}
 
 	@Override
 	public void onStop(FileAlterationObserver observer) {
-		System.out.println("No longer listening on folder: " + observer.getDirectory());		
+		//System.out.println("No longer listening on folder: " + observer.getDirectory());		
 	}
 	
 	@Override

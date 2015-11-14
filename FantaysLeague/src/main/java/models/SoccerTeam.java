@@ -42,15 +42,14 @@ public class SoccerTeam extends Team {
 		// update();
 	}
 
-	public SoccerTeam(String teamname, User owner, ArrayList<SoccerPlayer> players, Subject listener) {
+	public SoccerTeam(String teamname, User owner, double budget, ArrayList<SoccerPlayer> players, Subject listener) {
 		// Load team from file.
 		teamName = teamname;
 		this.owner = owner;
 		subject = listener;
 		selectPlayers = new ArrayList<SoccerPlayer>();
-		
+		this.budget = budget;
 		setAmountOfPlayersAllowed(15);
-		budget = 100.0;
 		positions.put("G", 2);
 		positions.put("D", 5);
 		positions.put("M", 5);
@@ -167,6 +166,7 @@ public class SoccerTeam extends Team {
 	    	File saveFile = new File(FILEPATH + this.teamName);
 	    	
 	    	output.add(owner.getUserName());
+	    	output.add(Double.toString(budget));
 	    	for(Player player: selectPlayers){
 	    		output.add(player.getID());
 	    	}	

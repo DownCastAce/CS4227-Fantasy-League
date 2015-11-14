@@ -20,6 +20,7 @@ public class League {
     protected User owner;
     protected Map<SoccerTeam, Integer> leagueTeams;
     protected CareTaker caretaker;
+
     protected String leagueName;
     protected String sport;
     
@@ -34,6 +35,7 @@ public class League {
     	//Add the owners team.
     	leagueTeams.put(ownerTeam, 0);
     	saveState();
+
     }
     //
     public League(User owner, String leagueName, String sport, Date lastUpdate, Map<SoccerTeam, Integer> leagueTeams){
@@ -59,6 +61,7 @@ public class League {
     public CareTaker getCareTaker(){
     	return caretaker;
     }
+
     public String getLeagueName(){
     	return leagueName;
     }

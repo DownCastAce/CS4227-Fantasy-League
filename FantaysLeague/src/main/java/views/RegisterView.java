@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 
@@ -29,7 +30,7 @@ public class RegisterView extends JFrame {
 		setBounds(100, 100, 451, 183);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaptionText);
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

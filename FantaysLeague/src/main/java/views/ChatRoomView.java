@@ -35,7 +35,7 @@ public class ChatRoomView extends JFrame {
 		setTitle("Chat Room");
 			
 		JPanel northPanel = new JPanel(new GridLayout(3,1));
-		northPanel.setBackground(SystemColor.activeCaptionText);
+		northPanel.setBackground(Color.WHITE);
 		tf = new JTextField("");
 		northPanel.add(tf);
 		getContentPane().add(northPanel, BorderLayout.NORTH);
@@ -49,12 +49,12 @@ public class ChatRoomView extends JFrame {
 		getContentPane().add(centerPanel, BorderLayout.CENTER);
 
 		JPanel leftPanel = new JPanel();
-		leftPanel.setBackground(SystemColor.activeCaptionText);
+		leftPanel.setBackground(Color.WHITE);
 		leftPanel.setPreferredSize(new Dimension(100,600));
 		getContentPane().add(leftPanel, BorderLayout.WEST);
 		
 		JPanel southPanel = new JPanel();
-		southPanel.setBackground(SystemColor.activeCaptionText);
+		southPanel.setBackground(Color.WHITE);
 		getContentPane().add(southPanel, BorderLayout.SOUTH);
 		btnLeave = new JButton("Back To Main Menu");// you have to login before being able to logout
 		btnLeave.setFont(new Font("Tahoma", Font.BOLD, 11));

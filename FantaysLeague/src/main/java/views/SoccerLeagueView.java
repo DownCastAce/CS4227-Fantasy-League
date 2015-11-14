@@ -19,6 +19,8 @@ import models.SoccerTeam;
 import models.Team;
 import stats.CareTaker;
 import stats.StatMomento;
+import java.awt.Color;
+
 
 public class SoccerLeagueView extends JFrame {
 
@@ -32,6 +34,7 @@ public class SoccerLeagueView extends JFrame {
 	    public SoccerLeagueView() {
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        viewPanel = new JPanel();
+	        viewPanel.setBackground(Color.WHITE);
 	        this.setSize(800, 600);
 	        setLocationRelativeTo(null);
 
@@ -41,7 +44,7 @@ public class SoccerLeagueView extends JFrame {
 	        btnReturnToMainMenu = new JButton("Return to main menu");
 	        btnReturnToMainMenu.setBounds(400, 300, 100, 50);
 	        viewPanel.add(btnReturnToMainMenu);
-	        this.add(viewPanel);
+	        getContentPane().add(viewPanel);
 	    }
 
 	    public void setTitle(League currentLeague){
