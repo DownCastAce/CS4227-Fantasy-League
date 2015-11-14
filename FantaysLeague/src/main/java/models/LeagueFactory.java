@@ -16,7 +16,8 @@ public class LeagueFactory {
 	private static final String FILEPATH = "resources/leagues/";
 	
 	public static League newLeague(User owner, String name, String sport, Subject listener){
-		League result = new League(owner, name, sport);
+		Team ownerTeam = TeamFactory.load(sport, owner.getTeamName(), listener);
+		League result = new League(owner, name, (SoccerTeam) ownerTeam, sport);
 		result.save();
 		return result;
 	}
@@ -25,19 +26,18 @@ public class LeagueFactory {
 		List<String> lines;
 		Date leagueDate;
 		try{
-			File leagueFile = new File(FILEPATH + leagueName);
-			lines = FileUtils.readLines(leagueFile);
-			leagueDate = new Date((leagueFile).lastModified());
+			lines = FileUtils.readLines(new File(FILEPATH + leagueName));
+			leagueDate = new Date((new File(FILEPATH + leagueName)).lastModified());
 		}catch(IOException e){
 			return null;
 		}
-		
+			
 		User owner = UserFactory.load(lines.remove(0));
 		
-		Map<String, Integer> teamPoints = new HashMap<>();
+		Map<SoccerTeam, Integer> teamPoints = new HashMap<>();
 		for(String line : lines) {
 			String[] teamData = line.split(",");
-			teamPoints.put(teamData[0], Integer.parseInt(teamData[1]));
+			teamPoints.put((SoccerTeam) TeamFactory.load("soccer", teamData[0], listener), Integer.parseInt(teamData[1]));
 		}
 		return new League(owner, leagueName, sport, leagueDate, teamPoints);
 	}

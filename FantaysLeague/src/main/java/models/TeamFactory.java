@@ -20,7 +20,8 @@ public class TeamFactory {
 
 			Roster roster = Roster.getInstance(listener);
 			rosterPlayers = roster.getAllPlayers();
-				    	
+			SoccerPlayer p;
+
 	    	List<String> playerIdsList;
 	    	
 	    	//load file into List
@@ -33,12 +34,13 @@ public class TeamFactory {
 	    	
 	    	//Create user based on the first line of the list
 	    	User teamOwner = UserFactory.load(playerIdsList.remove(0));
+	    	double budget = Double.parseDouble(playerIdsList.remove(0));
 	    	
 	    	//create a list of player by iterating over ids in the list.
 	    	for(String playerId: playerIdsList)	    	
 	    		teamPlayers.add((SoccerPlayer)roster.getPlayer(playerId));
 	    	
-	    	team = new SoccerTeam(teamName, teamOwner, teamPlayers, listener);
+	    	team = new SoccerTeam(teamName, teamOwner, budget, teamPlayers, listener);
 	    	listener.attach(team);
     	}
 

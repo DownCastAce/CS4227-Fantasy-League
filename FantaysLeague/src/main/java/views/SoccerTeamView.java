@@ -27,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.Font;
+import java.awt.Color;
 
 public class SoccerTeamView extends JFrame {
 	
@@ -64,7 +65,7 @@ public class SoccerTeamView extends JFrame {
 		setBounds(100, 100, 695, 735);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaptionText);
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -223,6 +224,10 @@ public class SoccerTeamView extends JFrame {
 	public void addFinaliseButtonListener(ActionListener finaliseTeamListener)
 	{
 		btnFinaliseTeam.addActionListener(finaliseTeamListener);
+	}
+	public void addReturnListener(ActionListener returnListener)
+	{
+		btnReturn.addActionListener(returnListener);
 	}
 	
 	public String getComboBoxSelection()

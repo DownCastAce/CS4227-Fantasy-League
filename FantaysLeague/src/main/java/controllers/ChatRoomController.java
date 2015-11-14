@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+
+import interceptors.LoggingInterceptor;
 import models.IUser;
 import models.User;
 import views.ChatRoomView;
@@ -120,7 +123,7 @@ public class ChatRoomController {
 			sOutput.writeObject("LOGOUT");
 		}
 		catch(IOException e) {
-			
+			System.out.println("Logged Out");
 		}
 	}
 	
@@ -129,6 +132,7 @@ public class ChatRoomController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			LoggingInterceptor.LogMessage(user, view.getMessage());
 			sendMessage(view.getMessage().trim());
 			view.setMessage(" ");
 		}
@@ -140,7 +144,11 @@ public class ChatRoomController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			Logout();
+			
+			if(connected){
+				Logout();			
+			}
+			
 			GoBackToMainMenuCommand com = new GoBackToMainMenuCommand(user);
 			view.dispose();
 			com.execute();

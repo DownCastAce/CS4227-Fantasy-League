@@ -39,7 +39,7 @@ public class TeamFactoryTest {
 		FileUtils.deleteQuietly(TEST_TEAM_FILE);
 		FileUtils.write(TEST_LEAGUE_FILE, TEST_OWNER + "\n" + TEST_TEAM + ",101");
 		FileUtils.write(TEST_OWNER_FILE, TEST_OWNER + ",123," + TEST_TEAM);
-		FileUtils.write(TEST_TEAM_FILE, TEST_OWNER + "\n1\n2\n3\n4\n5");
+		FileUtils.write(TEST_TEAM_FILE, TEST_OWNER + "\n100\n1\n2\n3\n4\n5");
 		FileAlterationObserver observer = new FileAlterationObserver(RES_FOLDER);
 		FileAlterationMonitor monitor = new FileAlterationMonitor(5000);
 		StatUpdateListener listener = new StatUpdateListener();

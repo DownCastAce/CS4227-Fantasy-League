@@ -13,4 +13,6 @@ public abstract class Team extends Observer{
 	public abstract double getBudget();
 	
 	public abstract int getAmountOfPlayersAllowed();
+
+	public abstract int getTotalPoints();
 }

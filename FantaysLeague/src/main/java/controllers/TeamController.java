@@ -31,6 +31,7 @@ public class TeamController {
 		view.addFilterListener(new FilterListener());
 		view.addRemovePlayerListener(new RemovePlayerListener());
 		view.addFinaliseButtonListener(new FinaliseTeamListener());
+		view.addReturnListener(new ReturnListener());
 		view.setVisible(true);
 
 		if (team.getPlayerList().size() != 0) {
@@ -38,7 +39,7 @@ public class TeamController {
 			view.updateDefenderTable(team.getPlayerList());
 			view.updateMidfielderTable(team.getPlayerList());
 			view.updateForwardsTable(team.getPlayerList());
-			// view.setBudgetTextField(team.getBudget());
+			view.setBudgetTextField(team.getBudget());
 		}
 	}
 
@@ -151,6 +152,18 @@ public class TeamController {
 			FinaliseTeamCommand com = new FinaliseTeamCommand(user, team);
 			com.execute();
 			
+			view.dispose();
+		}
+		
+	}
+	
+	class ReturnListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			GoBackToMainMenuCommand com = new GoBackToMainMenuCommand(user);
+			com.execute();
 			view.dispose();
 		}
 		

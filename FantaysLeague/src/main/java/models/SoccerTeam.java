@@ -41,21 +41,21 @@ public class SoccerTeam extends Team {
 		// update();
 	}
 
-	public SoccerTeam(String teamname, User owner, ArrayList<SoccerPlayer> players, Subject listener) {
+	public SoccerTeam(String teamname, User owner, double budget, ArrayList<SoccerPlayer> players, Subject listener) {
 		// Load team from file.
 		this.teamName = teamname;
 		this.owner = owner;
-		this.subject = listener;
-		this.selectPlayers = new ArrayList<SoccerPlayer>();
-		
+
+		subject = listener;
+		selectPlayers = new ArrayList<SoccerPlayer>();
+		this.budget = budget;
 		setAmountOfPlayersAllowed(15);
-		this.budget = 100.0;
-		this.positions.put("G", 2);
-		this.positions.put("D", 5);
-		this.positions.put("M", 5);
-		this.positions.put("F", 3);
-		
-		this.selectPlayers.addAll(players);
+		positions.put("G", 2);
+		positions.put("D", 5);
+		positions.put("M", 5);
+		positions.put("F", 3);
+
+		selectPlayers.addAll(players);
 
 		//Placeholder to updating budget
 		for (SoccerPlayer player : players) {
@@ -70,6 +70,10 @@ public class SoccerTeam extends Team {
 	}
 
 	@Override
+	public int getTotalPoints(){
+		return totalPoints;
+	}
+	
 	public int getAmountOfPlayersAllowed() {
 		return amountOfPlayersAllowed;
 	}
@@ -170,6 +174,7 @@ public class SoccerTeam extends Team {
 	    	File saveFile = new File(FILEPATH + this.teamName);
 	    	
 	    	output.add(owner.getUserName());
+	    	output.add(Double.toString(budget));
 	    	for(Player player: selectPlayers){
 	    		output.add(player.getID());
 	    	}	

@@ -22,14 +22,13 @@ public class MainMenuView extends JFrame {
 	private JButton btnChatRoom;
 	
 	public MainMenuView() {
-		setBackground(Color.LIGHT_GRAY);
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 659, 354);
 		setLocationRelativeTo(null);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaptionText);
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

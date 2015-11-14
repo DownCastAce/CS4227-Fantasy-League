@@ -56,7 +56,7 @@ public class SoccerTeamTest {
 	public void testFourConstructor() {
 		ArrayList<SoccerPlayer> testTeamsList = new ArrayList<>();
 		testTeamsList.add(new SoccerPlayer("1", "DownCastAce", "D", 8.5));
-		Team testTeam = new SoccerTeam(TEST_TEAM, TEST_USER, testTeamsList, TEST_SUBJECT);
+		Team testTeam = new SoccerTeam(TEST_TEAM, TEST_USER,100, testTeamsList, TEST_SUBJECT);
 		assertTrue("Team budget not doesn't match Expected : Actual) " + (TEST_TEAM_BUDGET-8.5) + " : " + testTeam.getBudget(), testTeam.getBudget() == (TEST_TEAM_BUDGET - 8.5));
 		assertEquals("Owner name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testTeam.getOwner(), TEST_USER, testTeam.getOwner());
 		assertEquals("Team name doesn't match (Expected : Actual) " + TEST_TEAM + " : " + testTeam.getTeamName(), TEST_TEAM, testTeam.getTeamName());
