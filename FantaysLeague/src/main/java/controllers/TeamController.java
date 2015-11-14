@@ -39,7 +39,7 @@ public class TeamController {
 			view.updateDefenderTable(team.getPlayerList());
 			view.updateMidfielderTable(team.getPlayerList());
 			view.updateForwardsTable(team.getPlayerList());
-			// view.setBudgetTextField(team.getBudget());
+			view.setBudgetTextField(team.getBudget());
 		}
 	}
 
