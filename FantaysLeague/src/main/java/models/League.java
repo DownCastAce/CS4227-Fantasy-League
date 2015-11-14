@@ -18,7 +18,7 @@ public class League {
 
     protected Date lastUpdate;
     protected User owner;
-    protected Map<SoccerTeam, Integer> leagueTeams;
+    protected Map<SoccerTeam, Integer> leagueTeams = new HashMap<>();
     protected CareTaker caretaker;
 
     protected String leagueName;
@@ -67,6 +67,7 @@ public class League {
     }
     
     public Map<SoccerTeam, Integer> getLeagueTeams(){
+    	
     	return leagueTeams;
     }
     

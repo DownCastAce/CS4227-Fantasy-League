@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-import interceptors.LoggingInterceptor;
+import interceptor.TestInterceptor;
 import models.IUser;
 import models.User;
 import views.ChatRoomView;
@@ -132,7 +132,7 @@ public class ChatRoomController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			LoggingInterceptor.LogMessage(user, view.getMessage());
+		//	LoggingInterceptor.LogMessage(user, view.getMessage());
 			sendMessage(view.getMessage().trim());
 			view.setMessage(" ");
 		}
