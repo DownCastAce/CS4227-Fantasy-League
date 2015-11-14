@@ -19,9 +19,9 @@ public class UserFactoryTest {
 	public void testNewUser() {
 		UserFactory uf = new UserFactory();
 		User testUser = uf.newUser(TEST_USER, PASSWORD, TEST_TEAM);
-		assertTrue("User name doesn't match (Expected : Actual) " + TEST_USER + " : " + testUser.getUserName(), TEST_USER.equals(testUser.getUserName()));
-		assertTrue("Password doesn't match (Expected : Actual) " + PASSWORD + " : " + testUser.getPassword(), PASSWORD.equals(testUser.getPassword()));
-		assertNull("Team name doesn't match (Expected : Actual) " + null + " : " + testUser.getTeamName(), testUser.getTeamName());
+		assertEquals("User name doesn't match (Expected : Actual) " + TEST_USER + " : " + testUser.getUserName(), TEST_USER, testUser.getUserName());
+		assertEquals("Password doesn't match (Expected : Actual) " + PASSWORD + " : " + testUser.getPassword(), PASSWORD, testUser.getPassword());
+		assertEquals("Team name doesn't match (Expected : Actual) " + TEST_TEAM + " : " + testUser.getTeamName(), testUser.getTeamName(), TEST_TEAM);
 	}
 	
 	@Test
@@ -29,9 +29,9 @@ public class UserFactoryTest {
 		User expectedUser = new User(TEST_USER, PASSWORD, TEST_TEAM);
 		expectedUser.save();
 		User actualUser = UserFactory.load(TEST_USER);
-		assertTrue("User name doesn't match (Expected : Actual) " + expectedUser.getUserName() + " : " + actualUser.getUserName(), expectedUser.getUserName().equals(actualUser.getUserName()));
-		assertTrue("Password name doesn't match (Expected : Actual) " + expectedUser.getPassword() + " : " + actualUser.getPassword(), expectedUser.getPassword().equals(actualUser.getPassword()));
-		assertTrue("Team name doesn't match (Expected : Actual) " + expectedUser.getTeamName() + " : " + actualUser.getTeamName(), expectedUser.getTeamName().equals(actualUser.getTeamName()));
+		assertEquals("User name doesn't match (Expected : Actual) " + expectedUser.getUserName() + " : " + actualUser.getUserName(), expectedUser.getUserName(), actualUser.getUserName());
+		assertEquals("Password name doesn't match (Expected : Actual) " + expectedUser.getPassword() + " : " + actualUser.getPassword(), expectedUser.getPassword(), actualUser.getPassword());
+		assertEquals("Team name doesn't match (Expected : Actual) " + expectedUser.getTeamName() + " : " + actualUser.getTeamName(), expectedUser.getTeamName(), actualUser.getTeamName());
 	}
 	
 	@After

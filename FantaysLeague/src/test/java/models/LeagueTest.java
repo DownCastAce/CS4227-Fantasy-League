@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.Subject;
-
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -24,7 +22,7 @@ public class LeagueTest {
 	private static final String TEST_TEAM = "testTeam";
 	private static final String TEST_PASSWORD = "testPassword";
 	private static final String LEAGUE_FILEPATH = "resources/leagues/";
-	private static final String TEAM_FILEPATH = "resources/Teams/";
+	private static final String TEAM_FILEPATH = "resources/teams/";
 	private static final String ROSTER_FILEPATH = "resources/Rosters/";
 	private static final String OWNER_FILEPATH = "resources/users/";
 	private static final User TEST_USER = new User(TEST_OWNER, TEST_PASSWORD, TEST_TEAM);
@@ -57,9 +55,9 @@ public class LeagueTest {
 	public void testContructorThreeParams() {
 		Date testDate = new Date();
 		League testLeague = new League(TEST_USER, TEST_LEAGUE_NAME, SPORT_SOCCER);
-		assertTrue("Owner name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testLeague.getOwner(), TEST_USER.equals(testLeague.getOwner()));
-		assertTrue("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME.equals(testLeague.getLeagueName()));
-		assertTrue("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER.equals(testLeague.getSport()));
+		assertEquals("Owner name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testLeague.getOwner(), TEST_USER, testLeague.getOwner());
+		assertEquals("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME, testLeague.getLeagueName());
+		assertEquals("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER, testLeague.getSport());
 		assertTrue("Sport doesn't match (Expected : Actual) " + testDate.getTime() + " : " + testLeague.getLastUpdate().getTime(), Math.abs((testDate.getTime()-testLeague.getLastUpdate().getTime())) < 1000);
 		assertTrue("Team name doesn't match (Expected : Actual) 0 : " + testLeague.getLeagueTeams().get(TEST_TEAM), 0 == testLeague.getLeagueTeams().get(TEST_TEAM));
 	}
@@ -70,9 +68,9 @@ public class LeagueTest {
 		Map<String, Integer> testTeams = new HashMap<>();
 		testTeams.put(TEST_TEAM, 101);
 		League testLeague = new League(TEST_USER, TEST_LEAGUE_NAME, SPORT_SOCCER, testDate, testTeams);
-		assertTrue("Owner name doesn't match (Expected : Actual) " + TEST_USER + " : " + testLeague.getOwner(), TEST_USER.equals(testLeague.getOwner()));
-		assertTrue("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME.equals(testLeague.getLeagueName()));
-		assertTrue("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER.equals(testLeague.getSport()));
+		assertEquals("Owner name doesn't match (Expected : Actual) " + TEST_USER + " : " + testLeague.getOwner(), TEST_USER, testLeague.getOwner());
+		assertEquals("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME, testLeague.getLeagueName());
+		assertEquals("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER, testLeague.getSport());
 		assertTrue("Sport doesn't match (Expected : Actual) " + testDate.getTime() + " : " + testLeague.getLastUpdate().getTime(), Math.abs((testDate.getTime()-testLeague.getLastUpdate().getTime())) < 1000);
 		assertTrue("Team name doesn't match (Expected : Actual) 101 : " + testLeague.getLeagueTeams().get(TEST_TEAM), 101 == testLeague.getLeagueTeams().get(TEST_TEAM));
 	}
@@ -86,7 +84,7 @@ public class LeagueTest {
 		assertTrue("File didn't save as expected", testLeague.save() && TEST_LEAGUE_FILE.exists());
 		List<String> actualResult = FileUtils.readLines(TEST_LEAGUE_FILE);
 		assertTrue("Amount of lines doesn't match (Expected : Actual) 2 : " + actualResult.size(), 2 == actualResult.size());
-		assertTrue("Owner doesn't match (Expected : Actual) " + TEST_OWNER + " : " + actualResult.get(0), TEST_OWNER.equals(actualResult.get(0)));
-		assertTrue("Team and score doesn't match (Expected : Actual) " + TEST_TEAM + ",101 : " + actualResult.get(1), (TEST_TEAM + ",101").equals(actualResult.get(1)));
+		assertEquals("Owner doesn't match (Expected : Actual) " + TEST_OWNER + " : " + actualResult.get(0), TEST_OWNER, actualResult.get(0));
+		assertEquals("Team and score doesn't match (Expected : Actual) " + TEST_TEAM + ",101 : " + actualResult.get(1), TEST_TEAM + ",101", actualResult.get(1));
 	}
 }

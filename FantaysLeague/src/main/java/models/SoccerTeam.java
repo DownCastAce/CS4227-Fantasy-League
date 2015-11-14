@@ -26,40 +26,41 @@ public class SoccerTeam extends Team {
 
 	public SoccerTeam(String teamname, User owner, Subject listener) {
 		// Create empty team.
-		teamName = teamname;
+		this.teamName = teamname;
 		this.owner = owner;
-		subject = listener;
-		selectPlayers = new ArrayList<SoccerPlayer>();
+		this.subject = listener;
+		this.selectPlayers = new ArrayList<SoccerPlayer>();
 
 		setAmountOfPlayersAllowed(15);
-		budget = 100.0;
-		positions.put("G", 2);
-		positions.put("D", 5);
-		positions.put("M", 5);
-		positions.put("F", 3);
+		this.budget = 100.0;
+		this.positions.put("G", 2);
+		this.positions.put("D", 5);
+		this.positions.put("M", 5);
+		this.positions.put("F", 3);
 
 		// update();
 	}
 
 	public SoccerTeam(String teamname, User owner, ArrayList<SoccerPlayer> players, Subject listener) {
 		// Load team from file.
-		teamName = teamname;
+		this.teamName = teamname;
 		this.owner = owner;
-		subject = listener;
-		selectPlayers = new ArrayList<SoccerPlayer>();
+		this.subject = listener;
+		this.selectPlayers = new ArrayList<SoccerPlayer>();
 		
 		setAmountOfPlayersAllowed(15);
-		budget = 100.0;
-		positions.put("G", 2);
-		positions.put("D", 5);
-		positions.put("M", 5);
-		positions.put("F", 3);
+		this.budget = 100.0;
+		this.positions.put("G", 2);
+		this.positions.put("D", 5);
+		this.positions.put("M", 5);
+		this.positions.put("F", 3);
 		
-		for(int i = 0; i < players.size(); i++)
-			System.out.println(players.get(i).getName());
+		this.selectPlayers.addAll(players);
 
-		selectPlayers.addAll(players);
-
+		//Placeholder to updating budget
+		for (SoccerPlayer player : players) {
+			this.budget -= player.getValue();
+		}
 		// update();
 
 	}

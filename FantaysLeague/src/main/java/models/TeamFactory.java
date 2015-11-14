@@ -10,21 +10,17 @@ import stats.Subject;
 
 public class TeamFactory {
 	
-	private static final String FILEPATH = "resources/Teams/";
+	private static final String FILEPATH = "resources/teams/";
 	
     public static Team load(String sport, String teamName, Subject listener) {
     	Team team = null;
     	if(sport.equals("soccer")){
     		ArrayList<SoccerPlayer> teamPlayers =  new ArrayList<SoccerPlayer>();
-    		ArrayList<SoccerPlayer> RosterPlayers =  new ArrayList<SoccerPlayer>();
+    		ArrayList<SoccerPlayer> rosterPlayers =  new ArrayList<SoccerPlayer>();
 
 			Roster roster = Roster.getInstance(listener);
-			RosterPlayers = roster.getAllPlayers();
-			SoccerPlayer p;
-			
-	    	for(int i = 0; i < 0; i++)
-	    		System.out.println(RosterPlayers.get(i).getName());
-	    	
+			rosterPlayers = roster.getAllPlayers();
+				    	
 	    	List<String> playerIdsList;
 	    	
 	    	//load file into List

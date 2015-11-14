@@ -1,10 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import stats.*;
-
 public class Player{
     protected String name;
     protected String ID;
