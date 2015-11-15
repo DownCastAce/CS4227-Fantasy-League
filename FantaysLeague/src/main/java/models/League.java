@@ -36,7 +36,6 @@ public class League {
     	//Loading league
     	this.sport = sport;
     	this.owner = owner;
-    	this.lastUpdate = lastUpdate;
     	this.leagueName = leagueName;
     	this.lastUpdate = lastUpdate;
     	//Add all the league team.

@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 
@@ -66,8 +69,14 @@ public class SoccerLeagueView extends JFrame {
 	            leagueTable[i-1][3] = Integer.toString(t.getValue());
 	            i++;
 	    	}
-	    	  leagueTableView = new JTable(leagueTable, leagueheaders);
-	    	  scroll.setViewportView(leagueTableView);
+	    		Arrays.sort(leagueTable, new Comparator<String []>() {
+	    			@Override
+	    			public int compare(final String[] entry1, final String[] entry2) {
+	    				return (entry2[3].compareTo(entry1[3]));
+	    			}
+				});
+	    	  	leagueTableView = new JTable(leagueTable, leagueheaders);
+	    	  	scroll.setViewportView(leagueTableView);
 	    	  
 	    }
 
