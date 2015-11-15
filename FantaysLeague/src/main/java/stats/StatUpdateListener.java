@@ -3,18 +3,27 @@ package stats;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.monitor.FileAlterationListener;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 
+import interceptor.ServerReplyContext;
+import interceptor.ServerReplyDispatcher;
+
 public class StatUpdateListener extends Subject implements FileAlterationListener{
 
 	private Map<Integer, List<Stat>> currentData = new HashMap<Integer, List<Stat>>();
 	private CareTaker caretaker = new CareTaker();
+	private ServerReplyDispatcher dispatcher;
+	private ServerReplyContext context;
+	
+	public void registerServerReplyDispatcher(ServerReplyDispatcher aDispatcher){
+		dispatcher = aDispatcher;
+	}
 	
 	@Override
 	public void onFileChange(File file) {
@@ -28,13 +37,6 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 	public Map<Integer, List<Stat>> getState(){
 		return currentData;		
 	}
-	public StatMomento saveState(){
-		return new StatMomento(currentData);
-	}
-	
-	public void setStateFromMomento(StatMomento momento){
-		currentData = momento.getState();
-	}
 
 	@Override
 	public void onFileCreate(File file) {
@@ -47,7 +49,6 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 				System.out.println("Not of correct type, ignoring");
 				return;
 			}
-			caretaker.add(saveState());
 			List<String> data = FileUtils.readLines(file);
 			String statNames[] = data.remove(0).split(",");		
 			for(String line : data){
@@ -64,9 +65,14 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 
 		notifyAllObservers();
 	}
-	
-	public CareTaker getPreviousStates(){
-		return caretaker;
+	public void notifyAllObservers(){
+		if(dispatcher != null){
+			dispatcher.preRemoteReply(context);
+		}
+		super.notifyAllObservers();
+		if(dispatcher != null){
+			dispatcher.postRemoteReply(context);
+		}
 	}
 
 	@Override
