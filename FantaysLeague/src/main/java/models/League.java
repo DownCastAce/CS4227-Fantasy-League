@@ -2,6 +2,7 @@ package models;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,17 +11,17 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 
+import main.MainDriver;
 import stats.CareTaker;
 import stats.StatMomento;
 import stats.Subject;
 
 public class League {
 
-    protected Date lastUpdate;
+    protected Instant lastUpdate;
     protected User owner;
     protected Map<SoccerTeam, Integer> leagueTeams = new HashMap<>();
     protected CareTaker caretaker;
-
     protected String leagueName;
     protected String sport;
     
@@ -29,7 +30,7 @@ public class League {
     public League(User owner, String leagueName, SoccerTeam ownerTeam, String sport){
     	//creating empty league
     	this.owner = owner;
-    	this.lastUpdate = new Date();
+    	this.lastUpdate = Instant.now();
     	this.leagueName = leagueName;
     	this.sport = sport;
     	//Add the owners team.
@@ -38,15 +39,15 @@ public class League {
 
     }
     //
-    public League(User owner, String leagueName, String sport, Date lastUpdate, Map<SoccerTeam, Integer> leagueTeams){
+    public League(User owner, String leagueName, String sport, long lastUpdate, Map<SoccerTeam, Integer> leagueTeams){
     	//Loading league
     	this.sport = sport;
     	this.owner = owner;
-    	this.lastUpdate = lastUpdate;
+    	this.lastUpdate = Instant.ofEpochSecond(lastUpdate);
     	this.leagueName = leagueName;
-    	this.lastUpdate = lastUpdate;
     	//Add all the league team.
     	this.leagueTeams = leagueTeams;
+    	update();
     	saveState();
     }
     
@@ -79,10 +80,14 @@ public class League {
     	leagueTeams.remove(team);
     }
     
-    public boolean update(String filename){
-    	//Update file format yet to be set
-    	lastUpdate = new Date();
-    	return false;
+    public void update(){
+    	if(MainDriver.lastUpdate.isAfter(this.lastUpdate)){
+	    	for(Map.Entry<SoccerTeam, Integer> entry : leagueTeams.entrySet()){
+	    		leagueTeams.put(entry.getKey(), entry.getValue() + entry.getKey().getTotalPoints());
+	    	}
+	    	this.lastUpdate = Instant.now();
+	    	saveState();
+    	}
     }
     public boolean save(){
     	/* 

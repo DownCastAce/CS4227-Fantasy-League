@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.attribute.FileTime;
+import java.time.Instant;
 
 import org.apache.commons.io.FileUtils;
 
@@ -24,12 +26,14 @@ public class LeagueFactory {
 	public static League load(String leagueName, String sport, Subject listener){
 		List<String> lines;
 		Date leagueDate;
+		long epochmille = 0;
 		try{
 			lines = FileUtils.readLines(new File(FILEPATH + leagueName));
-			leagueDate = new Date((new File(FILEPATH + leagueName)).lastModified());
+			long epochMille = new File(FILEPATH + leagueName).lastModified();
 		}catch(IOException e){
 			return null;
 		}
+		long epochsecond = epochmille/1000;
 			
 		User owner = UserFactory.load(lines.remove(0));
 		
@@ -38,6 +42,6 @@ public class LeagueFactory {
 			String[] teamData = line.split(",");
 			teamPoints.put((SoccerTeam) TeamFactory.load("soccer", teamData[0], listener), Integer.parseInt(teamData[1]));
 		}
-		return new League(owner, leagueName, sport, leagueDate, teamPoints);
+		return new League(owner, leagueName, sport, epochsecond, teamPoints);
 	}
 }

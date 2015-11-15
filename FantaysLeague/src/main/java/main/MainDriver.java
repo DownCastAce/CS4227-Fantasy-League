@@ -4,6 +4,9 @@ import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 
 import java.io.File;
+import java.time.Instant;
+import java.util.Date;
+
 import controllers.InitialMenuController;
 import views.InitialMenuView;
 import stats.StatUpdateListener;
@@ -19,9 +22,10 @@ public class MainDriver {
 	final static String rosterFilepath = "resources/Rosters/";
 	final static File resFolder = new File(statFilepath);
 	public static StatUpdateListener statListener = null;
+	public static Instant lastUpdate;	
 	
 	public static void main(String [] args){
-		
+		lastUpdate = Instant.now();
 		statListener = setupFileMonitor(resFolder, 2000);
 		statListener.attach(Roster.getInstance(statListener));
 		ServerReplyInterceptor inter1 = new TestInterceptor();
