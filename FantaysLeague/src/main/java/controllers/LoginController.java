@@ -3,11 +3,7 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
-
-import models.IUser;
 import models.User;
-import views.InitialMenuView;
 import views.LoginView;
 import views.MainMenuView;
 

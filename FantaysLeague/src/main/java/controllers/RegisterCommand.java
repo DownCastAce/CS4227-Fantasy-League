@@ -1,6 +1,5 @@
 package controllers;
 
-import views.InitialMenuView;
 import views.RegisterView;
 
 public class RegisterCommand implements Command {

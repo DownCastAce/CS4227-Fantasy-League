@@ -2,8 +2,6 @@ package controllers;
 
 import models.User;
 import models.UserFactory;
-import views.InitialMenuView;
-import views.RegisterView;
 
 public class ConfirmRegisterCommand implements Command {
 

@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -15,10 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import java.awt.Font;
-import javax.swing.UIManager;
 
 public class ChatRoomView extends JFrame {
 

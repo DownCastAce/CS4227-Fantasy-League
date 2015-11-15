@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
-
-import interceptor.TestInterceptor;
-import models.IUser;
 import models.User;
 import views.ChatRoomView;
 

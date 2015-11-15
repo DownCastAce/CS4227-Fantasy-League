@@ -1,27 +1,16 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Set;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-
 import models.League;
 import models.SoccerTeam;
-import models.Team;
-import stats.CareTaker;
-import stats.StatMomento;
 import java.awt.Color;
 
 

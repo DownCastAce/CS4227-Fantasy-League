@@ -1,6 +1,5 @@
 package controllers;
 
-import views.InitialMenuView;
 import views.LoginView;
 
 public class LoginCommand implements Command{

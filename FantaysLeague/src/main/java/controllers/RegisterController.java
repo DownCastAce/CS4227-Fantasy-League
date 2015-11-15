@@ -4,14 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import main.MainDriver;
-import models.League;
-import models.LeagueFactory;
-import models.Roster;
 import models.SoccerTeam;
 import models.TeamFactory;
 import models.User;
-import stats.Subject;
-import views.InitialMenuView;
 import views.RegisterView;
 
 public class RegisterController {

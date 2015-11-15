@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import views.InitialMenuView;
-import views.LoginView;
 
 public class InitialMenuController {
 	

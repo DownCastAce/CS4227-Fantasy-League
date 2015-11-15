@@ -4,11 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import main.MainDriver;
-import models.IUser;
 import models.League;
 import models.LeagueFactory;
 import models.SoccerTeam;
-import models.Team;
 import models.TeamFactory;
 import models.User;
 import views.MainMenuView;

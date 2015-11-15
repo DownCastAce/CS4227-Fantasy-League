@@ -1,6 +1,5 @@
 package controllers;
 
-import models.IUser;
 import models.User;
 import views.MainMenuView;
 

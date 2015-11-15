@@ -7,7 +7,6 @@ import java.io.File;
 import controllers.InitialMenuController;
 import views.InitialMenuView;
 import stats.StatUpdateListener;
-import stats.Subject;
 import models.Roster;
 
 import interceptor.*;

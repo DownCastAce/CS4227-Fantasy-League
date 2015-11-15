@@ -1,9 +1,6 @@
 package views;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
