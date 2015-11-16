@@ -56,12 +56,6 @@ public class SoccerTeam extends Team {
 
 		selectPlayers.addAll(players);
 
-		//Placeholder to updating budget
-		for (SoccerPlayer player : players) {
-			this.budget -= player.getValue();
-		}
-		// update();
-
 	}
 
 	public ArrayList<SoccerPlayer> getPlayerList() {
