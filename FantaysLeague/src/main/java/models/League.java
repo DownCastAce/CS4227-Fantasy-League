@@ -21,7 +21,7 @@ public class League {
     protected Instant lastUpdate;
     protected User owner;
     protected Map<SoccerTeam, Integer> leagueTeams = new HashMap<>();
-    protected CareTaker caretaker;
+    protected CareTaker caretaker = new CareTaker();
     protected String leagueName;
     protected String sport;
     

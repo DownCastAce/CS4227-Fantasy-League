@@ -13,6 +13,13 @@ public class TeamFactory {
 	private static final String FILEPATH = "resources/Teams/";
 	
     public static Team load(String sport, String teamName, Subject listener) {
+    	/*Format: filename = teamname
+    	 * ownerName
+    	 * budget
+    	 * points
+    	 * player1
+    	 * player2...
+    	 */
     	Team team = null;
     	if(sport.equals("soccer")){
     		ArrayList<SoccerPlayer> teamPlayers =  new ArrayList<SoccerPlayer>();
@@ -35,12 +42,13 @@ public class TeamFactory {
 	    	//Create user based on the first line of the list
 	    	User teamOwner = UserFactory.load(playerIdsList.remove(0));
 	    	double budget = Double.parseDouble(playerIdsList.remove(0));
+	    	int total = Integer.parseInt(playerIdsList.remove(0));
 	    	
 	    	//create a list of player by iterating over ids in the list.
 	    	for(String playerId: playerIdsList)	    	
 	    		teamPlayers.add((SoccerPlayer)roster.getPlayer(playerId));
 	    	
-	    	team = new SoccerTeam(teamName, teamOwner, budget, teamPlayers, listener);
+	    	team = new SoccerTeam(teamName, teamOwner, budget, teamPlayers, total, listener);
 	    	listener.attach(team);
     	}
 
