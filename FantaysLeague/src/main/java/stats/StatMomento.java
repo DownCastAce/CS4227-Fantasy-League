@@ -1,8 +1,9 @@
 package stats;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class StatMomento {
+public class StatMomento implements Serializable {
 	
 	private Map<String, Integer> state;
 	
