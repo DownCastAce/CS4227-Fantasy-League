@@ -24,8 +24,9 @@ public class AsyncWriteUtil implements Runnable{
 	public void run() {
 		try{
 			for(String line : output){
-				this.outfileWriter.write(line + "\n");
+				outfileWriter.write(line + "\n");
 			}
+			outfileWriter.close();
 		}catch(IOException e){	}	
 	}
 }
