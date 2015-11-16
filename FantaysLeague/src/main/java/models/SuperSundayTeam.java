@@ -13,7 +13,7 @@ public class SuperSundayTeam extends AbstractDecorator {
 
 	@Override
 	public String getTeamName() {
-		return tempTeam.getTeamName();
+		return "Super!!!" + tempTeam.getTeamName();
 	}
 
 	@Override

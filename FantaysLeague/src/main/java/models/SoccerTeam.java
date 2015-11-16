@@ -181,7 +181,6 @@ public class SoccerTeam extends Team {
 	    	try{
 	    		AsyncWriteUtil writer = new AsyncWriteUtil(output, saveFile);
 	    		writer.run();
-	    		//writer.write();
 	    	}
 	    	catch(IOException e){
 	    		return false;
