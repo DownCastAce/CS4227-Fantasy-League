@@ -95,7 +95,9 @@ public class SoccerTeamView extends JFrame {
 				"Name", "Value", "ID"
 			}
 		));
+		selectedGks.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedGks.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedGks.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		selectedDs = new JTable();
 		selectedDs.setModel(new DefaultTableModel(
@@ -107,10 +109,12 @@ public class SoccerTeamView extends JFrame {
 				{null, null, null},
 			},
 			new String[] {
-				"Name","Value", "ID"
+				"Name", "Value", "ID"
 			}
 		));
+		selectedDs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedDs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedDs.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		selectedMs = new JTable();
 		selectedMs.setModel(new DefaultTableModel(
@@ -122,10 +126,13 @@ public class SoccerTeamView extends JFrame {
 				{null, null, null},
 			},
 			new String[] {
-				"Name","Value", "ID"
+				"Name", "Value", "ID"
 			}
 		));
+		selectedMs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedMs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedMs.getColumnModel().getColumn(2).setMaxWidth(0);
+		
 		
 		selectedFs = new JTable();
 		selectedFs.setModel(new DefaultTableModel(
@@ -135,10 +142,12 @@ public class SoccerTeamView extends JFrame {
 				{null, null, null},
 			},
 			new String[] {
-				"Name","Value", "ID"
+				"Name", "Value", "ID"
 			}
 		));
+		selectedFs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedFs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedFs.getColumnModel().getColumn(2).setMaxWidth(0);
 		
 		availablePlayers = new JTable();
 		availablePlayers.setModel(new DefaultTableModel(
@@ -298,7 +307,9 @@ public class SoccerTeamView extends JFrame {
 		}
 		
 		selectedGks = new JTable(data,col);
+		selectedGks.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedGks.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedGks.getColumnModel().getColumn(2).setMaxWidth(0);
 		goalkeeperScrollPane.setViewportView(selectedGks);
 	}
 	
@@ -321,7 +332,9 @@ public class SoccerTeamView extends JFrame {
 		}
 		
 		selectedDs = new JTable(data,col);
+		selectedDs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedDs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedDs.getColumnModel().getColumn(2).setMaxWidth(0);
 		defenderScrollPane.setViewportView(selectedDs);
 	}
 	
@@ -344,7 +357,9 @@ public class SoccerTeamView extends JFrame {
 		}
 		
 		selectedMs = new JTable(data,col);
+		selectedMs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedMs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedMs.getColumnModel().getColumn(2).setMaxWidth(0);
 		midfielderScrollPane.setViewportView(selectedMs);
 	}
 	
@@ -367,7 +382,9 @@ public class SoccerTeamView extends JFrame {
 		}
 		
 		selectedFs = new JTable(data,col);
+		selectedFs.getColumnModel().getColumn(2).setPreferredWidth(0);
 		selectedFs.getColumnModel().getColumn(2).setMinWidth(0);
+		selectedFs.getColumnModel().getColumn(2).setMaxWidth(0);
 		forwardsScrollPane.setViewportView(selectedFs);
 	}
 	

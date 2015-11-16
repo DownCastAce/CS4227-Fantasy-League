@@ -67,6 +67,14 @@ public class SoccerLeagueView extends JFrame {
 	    				return (entry2[3].compareTo(entry1[3]));
 	    			}
 				});
+	    		i = 1;
+	    		for(Map.Entry<SoccerTeam, Integer> t : leagueTeams.entrySet()){
+		    		leagueTable[i-1][0] = ""+ (i);
+		            leagueTable[i-1][1] = t.getKey().getTeamName();
+		            leagueTable[i-1][2] = t.getKey().getOwner().getUserName();
+		            leagueTable[i-1][3] = Integer.toString(t.getValue());
+		            i++;
+		    	}
 	    	  	leagueTableView = new JTable(leagueTable, leagueheaders);
 	    	  	scroll.setViewportView(leagueTableView);
 	    	  
