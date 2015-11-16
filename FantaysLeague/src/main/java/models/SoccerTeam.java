@@ -41,7 +41,7 @@ public class SoccerTeam extends Team {
 		// update();
 	}
 
-	public SoccerTeam(String teamname, User owner, double budget, ArrayList<SoccerPlayer> players, Subject listener) {
+	public SoccerTeam(String teamname, User owner, double budget, ArrayList<SoccerPlayer> players, int points, Subject listener) {
 		// Load team from file.
 		this.teamName = teamname;
 		this.owner = owner;
@@ -49,6 +49,7 @@ public class SoccerTeam extends Team {
 		subject = listener;
 		selectPlayers = new ArrayList<SoccerPlayer>();
 		this.budget = budget;
+		this.totalPoints = points;
 		setAmountOfPlayersAllowed(15);
 		positions.put("G", 2);
 		positions.put("D", 5);
@@ -162,11 +163,11 @@ public class SoccerTeam extends Team {
 		return false;
 	}
 	
-	 public boolean save() {
+	 public synchronized boolean save() {
 	    	/*Format: filename = teamname
-	    	 * 
-	    	 * 
 	    	 * ownerName
+	    	 * budget
+	    	 * points
 	    	 * player1
 	    	 * player2...
 	    	 */
@@ -175,11 +176,14 @@ public class SoccerTeam extends Team {
 	    	
 	    	output.add(owner.getUserName());
 	    	output.add(Double.toString(budget));
+	    	output.add(Integer.toString(totalPoints));
 	    	for(Player player: selectPlayers){
 	    		output.add(player.getID());
 	    	}	
 	    	try{
-	    		FileUtils.writeLines(saveFile, output);
+	    		AsyncWriteUtil writer = new AsyncWriteUtil(output, saveFile);
+	    		writer.run();
+	    		//writer.write();
 	    	}
 	    	catch(IOException e){
 	    		return false;
