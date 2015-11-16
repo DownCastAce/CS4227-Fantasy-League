@@ -2,7 +2,9 @@ package stats;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 
 import interceptor.ServerReplyContext;
 import interceptor.ServerReplyDispatcher;
+import main.MainDriver;
 
 public class StatUpdateListener extends Subject implements FileAlterationListener{
 
@@ -62,8 +65,8 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 		}catch(IOException e){
 			System.out.println("IOException in onFileChange");
 		}
-
 		notifyAllObservers();
+		MainDriver.lastUpdate = Instant.now();
 	}
 	public void notifyAllObservers(){
 		if(dispatcher != null){

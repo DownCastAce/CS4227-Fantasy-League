@@ -4,14 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JTable;
-
 import main.MainDriver;
-import models.Player;
 import models.Roster;
 import models.SoccerPlayer;
 import models.SoccerTeam;
-import models.Team;
 import models.User;
 import views.SoccerTeamView;
 

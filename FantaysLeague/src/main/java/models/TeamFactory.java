@@ -16,11 +16,8 @@ public class TeamFactory {
     	Team team = null;
     	if(sport.equals("soccer")){
     		ArrayList<SoccerPlayer> teamPlayers =  new ArrayList<SoccerPlayer>();
-    		ArrayList<SoccerPlayer> rosterPlayers =  new ArrayList<SoccerPlayer>();
 
 			Roster roster = Roster.getInstance(listener);
-			rosterPlayers = roster.getAllPlayers();
-			SoccerPlayer p;
 
 	    	List<String> playerIdsList;
 	    	

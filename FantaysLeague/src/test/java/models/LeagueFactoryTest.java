@@ -3,10 +3,18 @@ package models;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.time.Instant;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.monitor.FileAlterationMonitor;
+import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import main.MainDriver;
+import stats.StatUpdateListener;
+import stats.Subject;
 
 public class LeagueFactoryTest {
 	private static final String TEST_TEAM = "testTeam";
@@ -21,6 +29,9 @@ public class LeagueFactoryTest {
 	private static final File TEST_LEAGUE_FILE = new File(LEAGUE_FILEPATH + TEST_LEAGUE_NAME);
 	private static final File TEST_OWNER_FILE = new File(OWNER_FILEPATH + TEST_OWNER);
 	private static final File TEST_TEAM_FILE = new File(TEAM_FILEPATH + TEST_TEAM);
+	private final static String statFilepath = "resources/users/";
+	private final static File RES_FOLDER = new File(statFilepath);
+	private static Subject TEST_SUBJECT = null;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -30,6 +41,20 @@ public class LeagueFactoryTest {
 		FileUtils.write(TEST_LEAGUE_FILE, TEST_OWNER + "\n" + TEST_TEAM + ",101");
 		FileUtils.write(TEST_OWNER_FILE, TEST_OWNER + ",123," + TEST_TEAM);
 		FileUtils.write(TEST_TEAM_FILE, TEST_OWNER + "\n1\n2\n3\n4\n5");
+		FileAlterationObserver observer = new FileAlterationObserver(RES_FOLDER);
+		FileAlterationMonitor monitor = new FileAlterationMonitor(5000);
+		StatUpdateListener listener = new StatUpdateListener();
+		
+		observer.addListener(listener);
+		monitor.addObserver(observer);
+		try {
+			monitor.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Unexpected problem with file monitor");
+			e.printStackTrace();
+		}
+		TEST_SUBJECT = listener;
 	}
 	
 	@After
@@ -40,8 +65,9 @@ public class LeagueFactoryTest {
 	
 	@Test
 	public void testNewLeague() {
+		MainDriver.lastUpdate = Instant.now();
 		FileUtils.deleteQuietly(TEST_LEAGUE_FILE);
-		League testLeague = LeagueFactory.newLeague(TEST_USER, TEST_LEAGUE_NAME, SPORT_SOCCER, null);
+		League testLeague = LeagueFactory.newLeague(TEST_USER, TEST_LEAGUE_NAME, SPORT_SOCCER, TEST_SUBJECT);
 		assertEquals("User name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testLeague.getOwner(), TEST_USER, testLeague.getOwner());
 		assertEquals("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME, testLeague.getLeagueName());
 		assertEquals("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER, testLeague.getSport());
@@ -50,7 +76,8 @@ public class LeagueFactoryTest {
 	
 	@Test
 	public void testLoadLeague() {
-		League testLeague = LeagueFactory.load(TEST_LEAGUE_NAME, SPORT_SOCCER, null);
+		MainDriver.lastUpdate = Instant.now();
+		League testLeague = LeagueFactory.load(TEST_LEAGUE_NAME, SPORT_SOCCER, TEST_SUBJECT);
 		assertEquals("Owner name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testLeague.getOwner().getUserName(), TEST_OWNER, testLeague.getOwner().getUserName());
 		assertEquals("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME, testLeague.getLeagueName());
 		assertEquals("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER, testLeague.getSport());

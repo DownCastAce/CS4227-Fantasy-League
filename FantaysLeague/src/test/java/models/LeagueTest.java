@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,19 +53,19 @@ public class LeagueTest {
 	
 	@Test
 	public void testContructorThreeParams() {
-		Date testDate = new Date();
+		long testDate = Instant.now().getEpochSecond();
 		SoccerTeam testTeam = new SoccerTeam(TEST_TEAM, TEST_USER, null);
 		League testLeague = new League(TEST_USER, TEST_LEAGUE_NAME, testTeam, SPORT_SOCCER);
 		assertEquals("Owner name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testLeague.getOwner(), TEST_USER, testLeague.getOwner());
 		assertEquals("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME, testLeague.getLeagueName());
 		assertEquals("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER, testLeague.getSport());
-		assertTrue("Sport doesn't match (Expected : Actual) " + testDate.getTime() + " : " + testLeague.getLastUpdate().getTime(), Math.abs((testDate.getTime()-testLeague.getLastUpdate().getTime())) < 1000);
+		assertTrue("Sport doesn't match (Expected : Actual) " + testDate + " : " + testLeague.getLastUpdate(), Math.abs((testDate-testLeague.getLastUpdate().getEpochSecond())) < 1000);
 		//assertTrue("Team name doesn't match (Expected : Actual) 0 : " + testLeague.getLeagueTeams().get(TEST_TEAM), 0 == testLeague.getLeagueTeams().get(TEST_TEAM));
 	}
 	
 	@Test
 	public void testConstructorFiveParams() {
-		Date testDate = new Date();
+		long testDate = Instant.now().getEpochSecond();
 		SoccerTeam testTeam = new SoccerTeam(TEST_TEAM, TEST_USER, null);
 		Map<SoccerTeam, Integer> testTeams = new HashMap<>();
 		testTeams.put(testTeam, 101);
@@ -73,13 +73,13 @@ public class LeagueTest {
 		assertEquals("Owner name doesn't match (Expected : Actual) " + TEST_USER + " : " + testLeague.getOwner(), TEST_USER, testLeague.getOwner());
 		assertEquals("League name doesn't match (Expected : Actual) " + TEST_LEAGUE_NAME + " : " + testLeague.getLeagueName(), TEST_LEAGUE_NAME, testLeague.getLeagueName());
 		assertEquals("Sport doesn't match (Expected : Actual) " + SPORT_SOCCER + " : " + testLeague.getSport(), SPORT_SOCCER, testLeague.getSport());
-		assertTrue("Sport doesn't match (Expected : Actual) " + testDate.getTime() + " : " + testLeague.getLastUpdate().getTime(), Math.abs((testDate.getTime()-testLeague.getLastUpdate().getTime())) < 1000);
+		assertTrue("Sport doesn't match (Expected : Actual) " + testDate + " : " + testLeague.getLastUpdate(), Math.abs((testDate-testLeague.getLastUpdate().getEpochSecond())) < 1000);
 		//assertTrue("Team name doesn't match (Expected : Actual) 101 : " + testLeague.getLeagueTeams().get(TEST_TEAM), 101 == testLeague.getLeagueTeams().get(TEST_TEAM));
 	}
 	
 	@Test
 	public void testSave() throws IOException {
-		Date testDate = new Date();
+		long testDate = Instant.now().getEpochSecond();
 		SoccerTeam testTeam = new SoccerTeam(TEST_TEAM, TEST_USER, null);
 		Map<SoccerTeam, Integer> testTeams = new HashMap<>();
 		testTeams.put(testTeam, 101);
