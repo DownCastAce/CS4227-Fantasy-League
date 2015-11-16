@@ -21,7 +21,7 @@ public class TeamFactory {
     	 * player2...
     	 */
     	Team team = null;
-    	if(sport.equals("soccer")){
+    	if(sport.equals("soccer") || sport.equals("supersoccer")){
     		ArrayList<SoccerPlayer> teamPlayers =  new ArrayList<SoccerPlayer>();
 
 			Roster roster = Roster.getInstance(listener);
@@ -49,17 +49,24 @@ public class TeamFactory {
 	    	team = new SoccerTeam(teamName, teamOwner, budget, teamPlayers, total, listener);
 	    	listener.attach(team);
     	}
+    	if(sport.equals("supersoccer")){
+    		return new SuperSoccerTeam(team);
+    	}
 
     	return team;
     }
 
-    public static Team newTeam(String sport, String name, User user, Subject listener) {
+
+	public static Team newTeam(String sport, String name, User user, Subject listener) {
     	Team team = null;
-        if (sport.equalsIgnoreCase("soccer")) {
+        if (sport.equals("soccer") || sport.equals("supersoccer")) {
             team = new SoccerTeam(name, user, listener);
             //team.save();
             listener.attach(team);
         }
+        if(sport.equals("supersoccer")){
+    		return new SuperSoccerTeam(team);
+    	}
 
         return team;
     }

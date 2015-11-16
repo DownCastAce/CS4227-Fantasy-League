@@ -1,8 +1,8 @@
 package models;
 
-public class SuperSundayTeam extends AbstractDecorator {
+public class SuperSoccerTeam extends AbstractDecorator {
 
-	public SuperSundayTeam(Team newTeam) {
+	public SuperSoccerTeam(Team newTeam) {
 		super(newTeam);
 	}
 
