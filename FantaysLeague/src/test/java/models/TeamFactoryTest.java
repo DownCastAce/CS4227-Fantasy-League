@@ -39,7 +39,7 @@ public class TeamFactoryTest {
 		FileUtils.deleteQuietly(TEST_TEAM_FILE);
 		FileUtils.write(TEST_LEAGUE_FILE, TEST_OWNER + "\n" + TEST_TEAM + ",101");
 		FileUtils.write(TEST_OWNER_FILE, TEST_OWNER + ",123," + TEST_TEAM);
-		FileUtils.write(TEST_TEAM_FILE, TEST_OWNER + "\n100\n1\n2\n3\n4\n5");
+		FileUtils.write(TEST_TEAM_FILE, TEST_OWNER + "\n70.9\n1\n2\n3\n4\n5");
 		FileAlterationObserver observer = new FileAlterationObserver(RES_FOLDER);
 		FileAlterationMonitor monitor = new FileAlterationMonitor(5000);
 		StatUpdateListener listener = new StatUpdateListener();
@@ -78,7 +78,7 @@ public class TeamFactoryTest {
 		Team testTeam = TeamFactory.load(SPORT_SOCCER, TEST_TEAM, TEST_SUBJECT);
 		assertEquals("User name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testTeam.getOwner().getUserName(), TEST_OWNER, testTeam.getOwner().getUserName());
 		assertEquals("Team name doesn't match (Expected : Actual) " + TEST_TEAM + " : " + testTeam.getTeamName(), TEST_TEAM, testTeam.getTeamName());
-		assertTrue("Budget doesn't match (Expected : Actual) 77 : " + testTeam.getBudget(), 77 == testTeam.getBudget());
+		assertTrue("Budget doesn't match (Expected : Actual) 70.9 : " + testTeam.getBudget(), 70.9 == testTeam.getBudget());
 		assertTrue("Amount of players allowed doesn't match (Expected : Actual) 15 : " + testTeam.getAmountOfPlayersAllowed(), 15 == testTeam.getAmountOfPlayersAllowed());
 		
 	}
