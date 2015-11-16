@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import main.MainDriver;
 import models.Roster;
 import models.SoccerPlayer;
@@ -144,11 +146,17 @@ public class TeamController {
 	class FinaliseTeamListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			FinaliseTeamCommand com = new FinaliseTeamCommand(user, team);
-			com.execute();
 			
-			view.dispose();
+			if(team.getPlayerList().size() == 15)
+			{
+			// TODO Auto-generated method stub
+				FinaliseTeamCommand com = new FinaliseTeamCommand(user, team);
+				com.execute();
+				
+				view.dispose();
+			}
+			else
+				JOptionPane.showMessageDialog(null,"Error","Must select 15 players!",0);
 		}
 		
 	}

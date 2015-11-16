@@ -35,7 +35,7 @@ public class RegisterController {
 		
 			team = (SoccerTeam) TeamFactory.newTeam("soccer", user.getTeamName(), user, MainDriver.statListener);
 			
-			GoToTeamView command = new GoToTeamView(team, user);
+			GoToTeamViewCommand command = new GoToTeamViewCommand(team, user);
 			command.execute();
 					
 			view.dispose();

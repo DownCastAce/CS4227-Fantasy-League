@@ -20,7 +20,7 @@ public class InitialMenuController {
 
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			RegisterCommand c = new RegisterCommand();
+			GoToRegisterScreenCommand c = new GoToRegisterScreenCommand();
 			c.execute();
 			view.dispose();
 		}
@@ -32,7 +32,7 @@ public class InitialMenuController {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
-			LoginCommand c = new LoginCommand();
+			GoToLoginScreenCommand c = new GoToLoginScreenCommand();
 			c.execute();
 			view.dispose();
 		}

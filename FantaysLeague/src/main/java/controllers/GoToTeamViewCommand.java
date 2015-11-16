@@ -4,12 +4,12 @@ import models.SoccerTeam;
 import models.User;
 import views.SoccerTeamView;
 
-public class GoToTeamView implements Command {
+public class GoToTeamViewCommand implements Command {
 
 	private SoccerTeam team;
 	private User user;
 	
-	public GoToTeamView(SoccerTeam t, User u){
+	public GoToTeamViewCommand(SoccerTeam t, User u){
 		team = t;
 		user = u;
 	}

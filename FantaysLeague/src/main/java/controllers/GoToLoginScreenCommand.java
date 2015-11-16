@@ -2,7 +2,7 @@ package controllers;
 
 import views.LoginView;
 
-public class LoginCommand implements Command{
+public class GoToLoginScreenCommand implements Command{
 		
 	@Override
 	public void execute() {

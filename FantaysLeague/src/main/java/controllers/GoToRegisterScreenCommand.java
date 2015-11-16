@@ -2,7 +2,7 @@ package controllers;
 
 import views.RegisterView;
 
-public class RegisterCommand implements Command {
+public class GoToRegisterScreenCommand implements Command {
 
 	public void execute() {
 		// TODO Auto-generated method stub

@@ -46,7 +46,7 @@ public class MainMenuController {
 			// TODO Auto-generated method stub
 			SoccerTeam team = (SoccerTeam)TeamFactory.load("soccer", user.getTeamName(), MainDriver.statListener);
 						
-			GoToTeamView com = new GoToTeamView(team,user);
+			GoToTeamViewCommand com = new GoToTeamViewCommand(team,user);
 			com.execute();
 		}
 		

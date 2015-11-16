@@ -28,11 +28,7 @@ public class LeagueController {
 		this.user = user;
 		this.caretaker = caretaker;
 		view.addReturnListener(new ListenForReturn());
-		Map<String, Integer> map = new HashMap<String,Integer>();
-		map = this.caretaker.get(0).getState();
-		
-		for(Map.Entry<String, Integer> e : map.entrySet())
-			System.out.println(e.getKey());
+
 		view.setVisible(true);
 
 		view.updateLeagueTable(league.getLeagueTeams());
