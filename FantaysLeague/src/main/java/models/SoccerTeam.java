@@ -19,17 +19,16 @@ public class SoccerTeam extends Team {
     protected String teamName;
     protected double budget;
     private int amountOfPlayersAllowed;
-    protected ArrayList<SoccerPlayer> selectPlayers;
+    protected ArrayList<SoccerPlayer> selectPlayers = new ArrayList<SoccerPlayer>();
     protected HashMap<String, Integer> positions = new HashMap<>();
     protected Subject subject;
-    protected int totalPoints;
+    protected int totalPoints = 0;
 
 	public SoccerTeam(String teamname, User owner, Subject listener) {
 		// Create empty team.
 		this.teamName = teamname;
 		this.owner = owner;
 		this.subject = listener;
-		this.selectPlayers = new ArrayList<SoccerPlayer>();
 
 		setAmountOfPlayersAllowed(15);
 		this.budget = 100.0;
@@ -41,14 +40,14 @@ public class SoccerTeam extends Team {
 		// update();
 	}
 
-	public SoccerTeam(String teamname, User owner, double budget, ArrayList<SoccerPlayer> players, Subject listener) {
+	public SoccerTeam(String teamname, User owner, double budget, ArrayList<SoccerPlayer> players, int points, Subject listener) {
 		// Load team from file.
 		this.teamName = teamname;
 		this.owner = owner;
 
 		subject = listener;
-		selectPlayers = new ArrayList<SoccerPlayer>();
 		this.budget = budget;
+		this.totalPoints = points;
 		setAmountOfPlayersAllowed(15);
 		positions.put("G", 2);
 		positions.put("D", 5);
@@ -162,11 +161,11 @@ public class SoccerTeam extends Team {
 		return false;
 	}
 	
-	 public boolean save() {
+	 public synchronized boolean save() {
 	    	/*Format: filename = teamname
-	    	 * 
-	    	 * 
 	    	 * ownerName
+	    	 * budget
+	    	 * points
 	    	 * player1
 	    	 * player2...
 	    	 */
@@ -175,11 +174,14 @@ public class SoccerTeam extends Team {
 	    	
 	    	output.add(owner.getUserName());
 	    	output.add(Double.toString(budget));
+	    	output.add(Integer.toString(totalPoints));
 	    	for(Player player: selectPlayers){
 	    		output.add(player.getID());
 	    	}	
 	    	try{
-	    		FileUtils.writeLines(saveFile, output);
+	    		AsyncWriteUtil writer = new AsyncWriteUtil(output, saveFile);
+	    		writer.run();
+	    		//writer.write();
 	    	}
 	    	catch(IOException e){
 	    		return false;

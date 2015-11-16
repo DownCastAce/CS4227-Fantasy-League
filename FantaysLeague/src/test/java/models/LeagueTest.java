@@ -14,6 +14,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import main.MainDriver;
+
 public class LeagueTest {
 	private static final String TEST_OWNER = "testUser";
 	private static final String TEST_ROSTER = "testRoster";
@@ -65,6 +67,7 @@ public class LeagueTest {
 	
 	@Test
 	public void testConstructorFiveParams() {
+		MainDriver.lastUpdate = Instant.now();
 		long testDate = Instant.now().getEpochSecond();
 		SoccerTeam testTeam = new SoccerTeam(TEST_TEAM, TEST_USER, null);
 		Map<SoccerTeam, Integer> testTeams = new HashMap<>();
@@ -79,12 +82,14 @@ public class LeagueTest {
 	
 	@Test
 	public void testSave() throws IOException {
+		MainDriver.lastUpdate = Instant.now();
 		long testDate = Instant.now().getEpochSecond();
 		SoccerTeam testTeam = new SoccerTeam(TEST_TEAM, TEST_USER, null);
 		Map<SoccerTeam, Integer> testTeams = new HashMap<>();
 		testTeams.put(testTeam, 101);
 		League testLeague = new League(TEST_USER, TEST_LEAGUE_NAME, SPORT_SOCCER, testDate, testTeams);
-		assertTrue("File didn't save as expected", testLeague.save() && TEST_LEAGUE_FILE.exists());
+		testLeague.save();
+		assertTrue("File didn't save as expected TEST_LEAGUE_FILE.exists()", TEST_LEAGUE_FILE.exists());
 		List<String> actualResult = FileUtils.readLines(TEST_LEAGUE_FILE);
 		assertTrue("Amount of lines doesn't match (Expected : Actual) 2 : " + actualResult.size(), 2 == actualResult.size());
 		assertEquals("Owner doesn't match (Expected : Actual) " + TEST_OWNER + " : " + actualResult.get(0), TEST_OWNER, actualResult.get(0));

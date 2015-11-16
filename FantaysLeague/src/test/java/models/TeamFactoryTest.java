@@ -78,7 +78,7 @@ public class TeamFactoryTest {
 		Team testTeam = TeamFactory.load(SPORT_SOCCER, TEST_TEAM, TEST_SUBJECT);
 		assertEquals("User name doesn't match (Expected : Actual) " + TEST_OWNER + " : " + testTeam.getOwner().getUserName(), TEST_OWNER, testTeam.getOwner().getUserName());
 		assertEquals("Team name doesn't match (Expected : Actual) " + TEST_TEAM + " : " + testTeam.getTeamName(), TEST_TEAM, testTeam.getTeamName());
-		assertTrue("Budget doesn't match (Expected : Actual) 70.9 : " + testTeam.getBudget(), 70.9 == testTeam.getBudget());
+		assertTrue("Budget doesn't match (Expected : Actual) 77 : " + testTeam.getBudget(), 77 == testTeam.getBudget());
 		assertTrue("Amount of players allowed doesn't match (Expected : Actual) 15 : " + testTeam.getAmountOfPlayersAllowed(), 15 == testTeam.getAmountOfPlayersAllowed());
 		
 	}
