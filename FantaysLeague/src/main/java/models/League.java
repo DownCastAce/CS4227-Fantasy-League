@@ -43,6 +43,7 @@ public class League {
     	//Loading league
     	this.sport = sport;
     	this.owner = owner;
+
     	this.lastUpdate = Instant.ofEpochSecond(lastUpdate);
     	this.leagueName = leagueName;
     	//Add all the league team.
@@ -89,7 +90,7 @@ public class League {
 	    	saveState();
     	}
     }
-    public boolean save(){
+    public synchronized boolean save(){
     	/* 
     	 * Save File Format
     	 * ---------
@@ -100,17 +101,17 @@ public class League {
     	 */
     	SAVEFILE = new File("resources/leagues/" + leagueName);
     	ArrayList<String> output = new ArrayList<String>();
+
+    	output.add(owner.getUserName());
     	for(Map.Entry<SoccerTeam, Integer> entry: leagueTeams.entrySet()){
     		output.add(entry.getKey().getTeamName() + "," + entry.getValue());
     	}
-    	System.out.println("PATH: " + SAVEFILE);
     	try {
-    		FileUtils.write(SAVEFILE, owner.getUserName());
-    		FileUtils.write(SAVEFILE, "\n",true);
-    		FileUtils.writeLines(SAVEFILE, output,true);
+    		AsyncWriteUtil writer = new AsyncWriteUtil(output, SAVEFILE);
+    		writer.run();
     	} catch(IOException e) {
     		return false;
     	}
     	return true;
-    }    
+    }
 }

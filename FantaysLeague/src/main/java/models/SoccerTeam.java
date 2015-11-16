@@ -155,7 +155,7 @@ public class SoccerTeam extends Team {
 		return false;
 	}
 	
-	 public boolean save() {
+	 public synchronized boolean save() {
 	    	/*Format: filename = teamname
 	    	 * ownerName
 	    	 * budget
@@ -173,7 +173,9 @@ public class SoccerTeam extends Team {
 	    		output.add(player.getID());
 	    	}	
 	    	try{
-	    		FileUtils.writeLines(saveFile, output);
+	    		AsyncWriteUtil writer = new AsyncWriteUtil(output, saveFile);
+	    		writer.run();
+	    		//writer.write();
 	    	}
 	    	catch(IOException e){
 	    		return false;

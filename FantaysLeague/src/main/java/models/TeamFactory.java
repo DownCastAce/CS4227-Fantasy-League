@@ -33,6 +33,7 @@ public class TeamFactory {
 	    	
 	    	//load file into List
 	    	try{
+	    		System.out.println("T: " + teamName);
 				playerIdsList = FileUtils.readLines(new File(FILEPATH + teamName));
 	    	}catch (IOException e) {
 				e.printStackTrace();
