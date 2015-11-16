@@ -48,6 +48,7 @@ public class MainMenuController {
 						
 			GoToTeamViewCommand com = new GoToTeamViewCommand(team,user);
 			com.execute();
+			view.dispose();
 		}
 		
 	}
