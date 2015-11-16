@@ -69,6 +69,7 @@ public class StatUpdateListener extends Subject implements FileAlterationListene
 		MainDriver.lastUpdate = Instant.now();
 	}
 	public void notifyAllObservers(){
+		context = new ServerReplyContext(new Date());
 		if(dispatcher != null){
 			dispatcher.preRemoteReply(context);
 		}

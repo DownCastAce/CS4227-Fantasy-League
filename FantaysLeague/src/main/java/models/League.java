@@ -17,11 +17,10 @@ public class League {
     protected Instant lastUpdate;
     protected User owner;
     protected Map<SoccerTeam, Integer> leagueTeams = new HashMap<>();
-    protected CareTaker caretaker = new CareTaker();
     protected String leagueName;
     protected String sport;
-    
-    protected File SAVEFILE;
+    protected boolean updated;
+	protected File SAVEFILE;
 
     public League(User owner, String leagueName, SoccerTeam ownerTeam, String sport){
     	//creating empty league
@@ -31,7 +30,6 @@ public class League {
     	this.sport = sport;
     	//Add the owners team.
     	leagueTeams.put(ownerTeam, 0);
-    	saveState();
 
     }
     //
@@ -44,22 +42,10 @@ public class League {
     	this.leagueName = leagueName;
     	//Add all the league team.
     	this.leagueTeams = leagueTeams;
+    	updated = true;
     	update();
-    	saveState();
     }
     
-    private void saveState(){
-    	Map<String, Integer> state = new HashMap<String, Integer>();
-    	for(Map.Entry<SoccerTeam, Integer> entry : leagueTeams.entrySet()){
-    		state.put(entry.getKey().getTeamName(), entry.getValue());
-    	}
-    	caretaker.add(new StatMomento(state));
-    }
-    
-    public CareTaker getCareTaker(){
-    	return caretaker;
-    }
-
     public String getLeagueName(){
     	return leagueName;
     }
@@ -68,7 +54,12 @@ public class League {
     	
     	return leagueTeams;
     }
-    
+    public boolean isUpdated() {
+		return updated;
+	}
+	public void setUpdated(boolean updated) {
+		this.updated = updated;
+	}
     public void addTeam(SoccerTeam team){
     	leagueTeams.put(team, 0);
     }
@@ -77,13 +68,26 @@ public class League {
     	leagueTeams.remove(team);
     }
     
+    public StatMomento saveToMomento(){
+    	if (isUpdated() == true) {
+			Map<String, Integer> state = new HashMap<String, Integer>();
+			for (Map.Entry<SoccerTeam, Integer> entry : leagueTeams.entrySet()) {
+				state.put(entry.getKey().getTeamName(), entry.getValue());
+			}
+			
+			return new StatMomento(state);
+    	}
+    	
+    	return null;
+    }
+    
     public void update(){
     	if(MainDriver.lastUpdate.isAfter(this.lastUpdate)){
 	    	for(Map.Entry<SoccerTeam, Integer> entry : leagueTeams.entrySet()){
 	    		leagueTeams.put(entry.getKey(), entry.getValue() + entry.getKey().getTotalPoints());
 	    	}
+	    	updated = true;
 	    	this.lastUpdate = Instant.now();
-	    	saveState();
     	}
     }
 

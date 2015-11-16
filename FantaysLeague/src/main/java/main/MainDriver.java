@@ -25,12 +25,10 @@ public class MainDriver {
 		lastUpdate = Instant.now();
 		statListener = setupFileMonitor(resFolder, 2000);
 		statListener.attach(Roster.getInstance(statListener));
-		ServerReplyInterceptor inter1 = new TestInterceptor();
-		ServerReplyInterceptor inter2 = new TestInterceptor();
+		ServerReplyInterceptor inter = new LoggingInterceptor();
 		
 		ServerReplyDispatcher dis = new ServerReplyDispatcher();
-		dis.register(inter1);
-		dis.register(inter2);
+		dis.register(inter);
 		statListener.registerServerReplyDispatcher(dis);
 		
 		

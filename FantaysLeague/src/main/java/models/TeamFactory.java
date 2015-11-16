@@ -57,7 +57,7 @@ public class TeamFactory {
     	Team team = null;
         if (sport.equalsIgnoreCase("soccer")) {
             team = new SoccerTeam(name, user, listener);
-            team.save();
+            //team.save();
             listener.attach(team);
         }
 

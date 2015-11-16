@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -15,7 +16,7 @@ public class LoginView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private JButton btnLogin;
 	private JButton btnCancel;
 	
@@ -45,7 +46,7 @@ public class LoginView extends JFrame {
 		contentPane.add(txtUsername);
 		txtUsername.setColumns(10);
 		
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField();
 		txtPassword.setBounds(111, 78, 188, 20);
 		contentPane.add(txtPassword);
 		txtPassword.setColumns(10);
@@ -68,7 +69,7 @@ public class LoginView extends JFrame {
 	
 	public String getPassword()
 	{
-		return txtPassword.getText();
+		return new String(txtPassword.getPassword());
 	}
 	
 	public void addConfirmListener(ActionListener listenForConfirm)
@@ -79,6 +80,16 @@ public class LoginView extends JFrame {
 	public void addCancelListener(ActionListener listenForCancel)
 	{
 		btnCancel.addActionListener(listenForCancel);
+	}
+
+	public void setUsername(String string) {
+		// TODO Auto-generated method stub
+		txtUsername.setText(string);
+	}
+
+	public void setPassword(String string) {
+		// TODO Auto-generated method stub
+		txtPassword.setText(string);
 	}
 
 }

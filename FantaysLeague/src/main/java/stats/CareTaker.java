@@ -1,9 +1,10 @@
 package stats;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CareTaker extends Observer{
+public class CareTaker implements Serializable{
 	private List<StatMomento> momentoList = new ArrayList<StatMomento>();
 	
 	public void add(StatMomento newMomento){
@@ -16,11 +17,5 @@ public class CareTaker extends Observer{
 	
 	public int size(){
 		return momentoList.size();
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
 	}
 }
